@@ -7,7 +7,7 @@ namespace test
     {
         static void Main(string[] args)
         {
-                BugEntity be = new BugEntity(1);
+            BugEntity be = new BugEntity(1);
         }
     }
 }

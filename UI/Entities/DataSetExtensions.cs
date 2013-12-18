@@ -58,7 +58,6 @@ namespace UI.Entities
                 result.Add(new BugEntity(
                         a, b, c, d, e, f, g, h, i, j 
                ));
-                MessageBox.Show(Convert.ToInt32(dr["bugbuild"]).ToString());
             }
 
             return result;

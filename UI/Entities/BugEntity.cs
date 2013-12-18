@@ -9,11 +9,11 @@ namespace UI.Entities
 {
     public enum BugSeverity
     {
-        Blocked         = 1,                                                                                             
-        Critical        = 2,                                                                                            
-        Normal          = 3,                                                                                           
-        Major           = 4,                                                                                          
-        FeatureRequest  = 5  
+        Blocked = 1,
+        Critical = 2,
+        Normal = 3,
+        Major = 4,
+        FeatureRequest = 5
     }
 
     public enum BugPriority
@@ -30,12 +30,12 @@ namespace UI.Entities
 
     public enum Status
     {
-        New         = 1,  
-        Assigned    = 2,
-        Reopened    = 3,
-        Verifield   = 4,
-        Closed      = 5,
-        Unconfirmed = 6  
+        New = 1,
+        Assigned = 2,
+        Reopened = 3,
+        Verifield = 4,
+        Closed = 5,
+        Unconfirmed = 6
     }
 
     public class BugEntity
@@ -43,7 +43,7 @@ namespace UI.Entities
         private int _id;
         private string _title;
         private string _summary;
-       
+
         private ProjectEntity _project;
         private EmployeeEntity _reporter;
         private EmployeeEntity _fixer;
@@ -56,7 +56,7 @@ namespace UI.Entities
         private int _build;
 
         public BugEntity()
-            :base()
+            : base()
         {
 
         }
@@ -65,48 +65,50 @@ namespace UI.Entities
         {
             _id = id;
 
-            //try
-            //{
-            BugEntity tmp =
-            DAL.Manager.SelectFromTable("bug", "bugid = " + _id,
-            "BUGPROJECTID",
-            "BUGTITLE",
-            "BUGSUMMARY",
-            "BUGSUBMITTED",
-            "BUGREPORTERID",
-            "BUGFIXERID",
-            "BUGPRIORITY",
-            "BUGSEVERITYID",
-            "BUGCOMPONENTID",
-            "BUGBUILD",
-            "BUGSTATUSID")
-            .ToBugs()[0];
+            try
+            {
+                BugEntity tmp =
+                DAL.Manager.SelectFromTable(
+                "bug", 
+                "bugid = " + _id,
+                "BUGPROJECTID",
+                "BUGTITLE",
+                "BUGSUMMARY",
+                "BUGSUBMITTED",
+                "BUGREPORTERID",
+                "BUGFIXERID",
+                "BUGPRIORITY",
+                "BUGSEVERITYID",
+                "BUGCOMPONENTID",
+                "BUGBUILD",
+                "BUGSTATUSID")
+                .ToBugs()[0];
 
-            this._project = tmp._project;
-            this._reporter = tmp._reporter;
-            this._fixer = tmp._fixer;
-            this._severity = tmp._severity;
-            this._status = tmp._status;
-            this._priority = tmp._priority;
-            this._component = tmp._component;
-            this._build = tmp._build;
-            this._summary = tmp._summary;
-            this._title = tmp._title;
-            //}
-            //catch(Exception e)
-            //{
-            //    MessageBox.Show("Unable to get bug from DB : " + e.Message);
-            //}
+                this._project = tmp._project;
+                this._reporter = tmp._reporter;
+                this._fixer = tmp._fixer;
+                this._severity = tmp._severity;
+                this._status = tmp._status;
+                this._priority = tmp._priority;
+                this._component = tmp._component;
+                this._build = tmp._build;
+                this._summary = tmp._summary;
+                this._title = tmp._title;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unable to get bug from DB : " + e.Message);
+            }
         }
 
         public BugEntity(
-            int projectid, 
-            string title, 
-            string summary, 
-            int reporterid, 
-            int fixerid, 
-            BugPriority priority, 
-            BugSeverity severity, 
+            int projectid,
+            string title,
+            string summary,
+            int reporterid,
+            int fixerid,
+            BugPriority priority,
+            BugSeverity severity,
             Component component,
             int build,
             Status status
