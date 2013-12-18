@@ -26,9 +26,18 @@ namespace BugTrackerWPF.DAL
             query += columns[columns.Length - 1];
 
             query += " FROM " + tableName;
-            query += " WHERE " + whereCondition;
+            
+            if (whereCondition != String.Empty)
+            {
+                query += " WHERE " + whereCondition;
+            }
 
             return this.ExecuteQuery(query);
+        }
+
+        public DataSet SelectFromTable(string tablename, params string[] columns)
+        {
+            return this.SelectFromTable(tablename, String.Empty, columns);
         }
     }
 }

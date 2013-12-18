@@ -14,9 +14,9 @@ namespace UI.Entities
     public static class DataSetExtensions
     {
 
-        public static Collection<EmployeeEntity> ToEmployeers(this DataSet ds)
+        public static ObservableCollection<EmployeeEntity> ToEmployeers(this DataSet ds)
         {
-            Collection<EmployeeEntity> result = new Collection<EmployeeEntity>();
+            ObservableCollection<EmployeeEntity> result = new ObservableCollection<EmployeeEntity>();
 
             foreach(DataRow dr in ds.Tables[0].Rows)
             {
@@ -26,9 +26,9 @@ namespace UI.Entities
             return result;
         }
 
-        public static Collection<ProjectEntity> ToProjects(this DataSet ds)
+        public static ObservableCollection<ProjectEntity> ToProjects(this DataSet ds)
         {
-            Collection<ProjectEntity> result = new Collection<ProjectEntity>();
+            ObservableCollection<ProjectEntity> result = new ObservableCollection<ProjectEntity>();
 
             foreach(DataRow dr in ds.Tables[0].Rows)
             {
@@ -38,22 +38,22 @@ namespace UI.Entities
             return result;
         }
 
-        public static Collection<BugEntity> ToBugs(this DataSet ds)
+        public static ObservableCollection<BugEntity> ToBugs(this DataSet ds)
         {
-            Collection<BugEntity> result = new Collection<BugEntity>();
-            result.Add(new BugEntity());
+            ObservableCollection<BugEntity> result = new ObservableCollection<BugEntity>();
+
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                var a = Convert.ToInt32(dr["bugprojectid"]);
-                var b = dr["bugtitle"].ToString();
-                var c = dr["bugsummary"].ToString();
-                var d = Convert.ToInt32(dr["bugreporterid"]);
-                var e = Convert.ToInt32(dr["bugfixerid"]);
-                var f = (BugPriority)Convert.ToInt32(dr["bugpriority"]);
-                var g = (BugSeverity)Convert.ToInt32(dr["bugseverityid"]);
-                var h = (Component)Convert.ToInt32(dr["bugcomponentid"]);
-                var i = Convert.ToInt32(dr["bugbuild"]);
-                var j = (Status)Convert.ToInt32(dr["bugstatusid"]);
+                int         a =              Convert.ToInt32(dr["bugprojectid"]);
+                string      b =              dr["bugtitle"].ToString();
+                string      c =              dr["bugsummary"].ToString();
+                int         d =              Convert.ToInt32(dr["bugreporterid"]);
+                int         e =              Convert.ToInt32(dr["bugfixerid"]);
+                BugPriority f = (BugPriority)Convert.ToInt32(dr["bugpriority"]);
+                BugSeverity g = (BugSeverity)Convert.ToInt32(dr["bugseverityid"]);
+                Component   h = (Component)  Convert.ToInt32(dr["bugcomponentid"]);
+                int         i =              Convert.ToInt32(dr["bugbuild"]);
+                Status      j = (Status)     Convert.ToInt32(dr["bugstatusid"]);
 
                 result.Add(new BugEntity(
                         a, b, c, d, e, f, g, h, i, j 

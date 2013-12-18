@@ -1,5 +1,5 @@
 ﻿using System;
-using UI.Entities;
+using UI.Models;
 
 namespace test
 {
@@ -7,7 +7,15 @@ namespace test
     {
         static void Main(string[] args)
         {
-            BugEntity be = new BugEntity(1);
+            BugModel bg = new BugModel();
+
+            bg.Load();
+
+            if(true)
+            {
+
+            }
+
         }
     }
 }
