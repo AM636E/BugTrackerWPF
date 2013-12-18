@@ -31,10 +31,10 @@ namespace BugTrackerWPF.DAL
 
         public DataSet GetValue(string tablename)
         {
-            return this.ExecutQuery("SELECT * FROM " + tablename);
+            return this.ExecuteQuery("SELECT * FROM " + tablename);
         }
 
-        public DataSet ExecutQuery(string query)
+       public override DataSet ExecuteQuery(string query)
         {
             OracleCommand command = _connection.CreateCommand();
             command.CommandText = query;
