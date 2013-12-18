@@ -26,9 +26,8 @@ namespace BugTrackerWPF.DAL
             query += columns[columns.Length - 1];
 
             query += " FROM " + tableName;
-            query += " WHERE " + whereCondition;// +";";
-            if(2+2 > 3)
-                //throw new Exception(query) ;
+            query += " WHERE " + whereCondition;
+
             return this.ExecuteQuery(query);
         }
     }

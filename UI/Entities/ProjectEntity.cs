@@ -33,13 +33,13 @@ namespace UI.Entities
 
             try
             {
-                DataSet ds = DAL.Manager.SelectFromTable(
+                DataSet ds = 
+                DAL.Manager.SelectFromTable(
                     "project",
-                    String.Format("projectid = {0}", _projectid),
+                    "projectid =  " + _projectid,
                     "projecttitle",
                     "projectdescription",
-                    "projectprice"
-                    );
+                    "projectprice");
 
                 DataRow row = ds.Tables[0].Rows[0];
 
@@ -49,7 +49,7 @@ namespace UI.Entities
             }
             catch (Exception e)
             {
-                MessageBox.Show(String.Format("Unable to get project from DB: {0}", e.Message));
+                MessageBox.Show(String.Format("Unable to get project from DB: " + e.Message));
             }
         }
 
