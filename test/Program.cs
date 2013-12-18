@@ -21,7 +21,7 @@ namespace test
         {
             try
             {
-                ProjectEntity pe = new ProjectEntity(1);
+                EmployeeEntity pe = new EmployeeEntity(1);
             }
             catch(Exception e)
             {

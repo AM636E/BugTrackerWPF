@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="DAL.cs" />
     <Compile Include="Entities\BugEntity.cs" />
+    <Compile Include="Entities\DataSetExtensions.cs" />
     <Compile Include="Entities\EmployeeEntity.cs" />
     <Compile Include="Entities\ProjectEntity.cs" />
     <Compile Include="MainWindow.xaml.cs">
