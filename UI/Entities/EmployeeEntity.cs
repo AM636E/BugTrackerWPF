@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.Common;
 using System.Windows;
 
 namespace UI.Entities
@@ -34,11 +29,9 @@ namespace UI.Entities
             _empid = empid;
             try
             {
-               List<EmployeeEntity> emps =
+               EmployeeEntity tmp =
                DAL.Manager.SelectFromTable("employee", "empid = " + _empid, "empfname", "empsname", "emppositionid")
-               .ToEmployeers();
-
-               EmployeeEntity tmp = emps[0];
+               .ToEmployeers()[0];
 
                _empfname = tmp._empfname;
                _empsname = tmp._empsname;
@@ -46,7 +39,7 @@ namespace UI.Entities
             }
             catch(Exception e)
             {
-                MessageBox.Show("Unable to get project from DB : " + e.Message);
+                MessageBox.Show("Unable to get employee from DB : " + e.Message);
             }
         }
     }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace UI.Entities
 {
-    enum BugSeverity
+    public enum BugSeverity
     {
         Blocked         = 1,                                                                                             
         Critical        = 2,                                                                                            
@@ -15,19 +16,19 @@ namespace UI.Entities
         FeatureRequest  = 5  
     }
 
-    enum BugPriority
+    public enum BugPriority
     {
         //priorities
     }
 
-    enum Component
+    public enum Component
     {
         CONFIG = 1,
         API = 2,
         COMPONENT = 3
     }
 
-    enum Status
+    public enum Status
     {
         New         = 1,  
         Assigned    = 2,
@@ -37,14 +38,11 @@ namespace UI.Entities
         Unconfirmed = 6  
     }
 
-    class BugEntity
+    public class BugEntity
     {
-        private string _id;
+        private int _id;
         private string _title;
-        
-        private int _bugprojectid;
-        private int _bugreporterid;
-        private int _bugfixer;
+        private string _summary;
        
         private ProjectEntity _project;
         private EmployeeEntity _reporter;
@@ -56,5 +54,74 @@ namespace UI.Entities
         private Component _component;
         private Status _status;
         private int _build;
+
+        public BugEntity()
+            :base()
+        {
+
+        }
+
+        public BugEntity(int id)
+        {
+            _id = id;
+
+            //try
+            //{
+            BugEntity tmp =
+            DAL.Manager.SelectFromTable("bug", "bugid = " + _id,
+            "BUGPROJECTID",
+            "BUGTITLE",
+            "BUGSUMMARY",
+            "BUGSUBMITTED",
+            "BUGREPORTERID",
+            "BUGFIXERID",
+            "BUGPRIORITY",
+            "BUGSEVERITYID",
+            "BUGCOMPONENTID",
+            "BUGBUILD",
+            "BUGSTATUSID")
+            .ToBugs()[0];
+
+            this._project = tmp._project;
+            this._reporter = tmp._reporter;
+            this._fixer = tmp._fixer;
+            this._severity = tmp._severity;
+            this._status = tmp._status;
+            this._priority = tmp._priority;
+            this._component = tmp._component;
+            this._build = tmp._build;
+            this._summary = tmp._summary;
+            this._title = tmp._title;
+            //}
+            //catch(Exception e)
+            //{
+            //    MessageBox.Show("Unable to get bug from DB : " + e.Message);
+            //}
+        }
+
+        public BugEntity(
+            int projectid, 
+            string title, 
+            string summary, 
+            int reporterid, 
+            int fixerid, 
+            BugPriority priority, 
+            BugSeverity severity, 
+            Component component,
+            int build,
+            Status status
+        )
+        {
+            this._project = new ProjectEntity(projectid);
+            this._reporter = new EmployeeEntity(reporterid);
+            this._fixer = new EmployeeEntity(fixerid);
+            this._severity = severity;
+            this._status = status;
+            this._priority = priority;
+            this._component = component;
+            this._build = build;
+            this._summary = summary;
+            this._title = title;
+        }
     }
 }

@@ -1,51 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.Common;
-
 using System.Windows;
 
 namespace UI.Entities
 {
     public class ProjectEntity
     {
-        private int _projectid;
-        private string _projecttitle;
-        private string _projectdescription;
-        private decimal _projectprice;
-
-        public int Id { get { return _projectid; } }
-        public Decimal Price { get { return _projectprice; } set { _projectprice = value; } }
-        public string Title { get { return _projecttitle; } set { _projecttitle = value; } }
-        public string Description { get { return _projectdescription; } set { _projectdescription = value; } }
+        private int _id;
+        private string _title;
+        private string _description;
+        private decimal _price;
+        
+        public int Id { get { return _id; } }
+        public Decimal Price { get { return _price; } set { _price = value; } }
+        public string Title { get { return _title; } set { _title = value; } }
+        public string Description { get { return _description; } set { _description = value; } }
 
         public ProjectEntity()
+            :base()
         {
+            
+        }
 
+        public ProjectEntity(string title, string desc, decimal price)
+        {
+            _title = title;
+            _description = desc;
+            _price = price;
         }
 
         public ProjectEntity(int projectid)
         {
-            _projectid = projectid;
+            _id = projectid;
 
             try
             {
-                DataSet ds = 
+                ProjectEntity tmp = 
                 DAL.Manager.SelectFromTable(
                     "project",
-                    "projectid =  " + _projectid,
+                    "projectid =  " + _id,
                     "projecttitle",
-                    "projectdescription",
-                    "projectprice");
+                    "PROJECTDESCRIPTION",
+                    "projectprice")
+                .ToProjects()[0];
 
-                DataRow row = ds.Tables[0].Rows[0];
-
-                _projecttitle = (string)row["projecttitle"];
-                _projectprice = (decimal)row["projectprice"];;
-                _projectdescription = row["projectdescription"].ToString();
+                _title = tmp.Title;
+                _price = tmp.Price;
+                _description = tmp.Description;
             }
             catch (Exception e)
             {
