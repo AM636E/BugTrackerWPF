@@ -13,5 +13,22 @@ namespace BugTrackerWPF.DAL
         public abstract void Connect();
 
         public abstract DataSet ExecuteQuery(string query);
+
+        public DataSet SelectFromTable(string tableName, string whereCondition,params string[] columns)
+        {
+            string query = "SELECT ";
+
+            for (int i = 0; i < columns.Length - 1; i ++ )
+            {
+                query += columns[i];
+            }
+
+            query += columns[columns.Length - 1];
+
+            query += " FROM " + tableName;
+            query += " WHERE " + whereCondition + ";";
+
+            return this.ExecuteQuery(query);
+        }
     }
 }
