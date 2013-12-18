@@ -20,14 +20,15 @@ namespace BugTrackerWPF.DAL
 
             for (int i = 0; i < columns.Length - 1; i ++ )
             {
-                query += columns[i];
+                query += columns[i] + ',';
             }
 
             query += columns[columns.Length - 1];
 
             query += " FROM " + tableName;
-            query += " WHERE " + whereCondition + ";";
-
+            query += " WHERE " + whereCondition;// +";";
+            if(2+2 > 3)
+                //throw new Exception(query) ;
             return this.ExecuteQuery(query);
         }
     }

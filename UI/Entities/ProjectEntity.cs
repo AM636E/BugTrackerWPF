@@ -33,21 +33,19 @@ namespace UI.Entities
 
             try
             {
-                DataSet ds = DAL.Manager.ExecuteQuery(
-                    String.Format(
-                        "SELECT projecttitle, projectdescription, projectprice " +
-                        "FROM Project " +
-                        "WHERE projectid = {0}", 
-                        _projectid
-                    )
-                );
+                DataSet ds = DAL.Manager.SelectFromTable(
+                    "project",
+                    String.Format("projectid = {0}", _projectid),
+                    "projecttitle",
+                    "projectdescription",
+                    "projectprice"
+                    );
 
                 DataRow row = ds.Tables[0].Rows[0];
 
                 _projecttitle = (string)row["projecttitle"];
-                _projectprice = (decimal)row["projectprice"];
-                _projectdescription = (string)row["projectdescription"];
-
+                _projectprice = (decimal)row["projectprice"];;
+                _projectdescription = row["projectdescription"].ToString();
             }
             catch (Exception e)
             {
