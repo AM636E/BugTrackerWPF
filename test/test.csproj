@@ -61,6 +61,10 @@
       <Project>{756b3883-8fd6-4970-87c0-ed9c071b5656}</Project>
       <Name>EFTest</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{14b7bd90-dfb0-4285-8104-b746f21d7c4b}</Project>
+      <Name>UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

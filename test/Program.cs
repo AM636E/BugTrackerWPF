@@ -11,6 +11,7 @@ using BugTrackerWPF.DAL;
 using BugTrackerWPF;
 
 using test.Entities;
+using UI.Entities;
 
 namespace test
 {
@@ -18,14 +19,13 @@ namespace test
     {
         static void Main(string[] args)
         {
-            OracleDB db = OracleDB.Instance;
-
-            DataSet ds = db.ExecutQuery("SELECT bugtitle FROM Bug");
-
-
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            try
             {
-                Console.WriteLine(dr["bugtitle"]);
+                ProjectEntity pe = new ProjectEntity(1);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }

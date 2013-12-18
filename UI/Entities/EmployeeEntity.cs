@@ -18,5 +18,10 @@ namespace UI.Entities
         private string _empfname;
         private string _empsname;
         private EmployeePosition _position;
+
+        public EmployeeEntity(int empid)
+        {
+
+        }
     }
 }
