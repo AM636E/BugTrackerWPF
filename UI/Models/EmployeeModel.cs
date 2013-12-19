@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace UI.Models
 {
-    class EmployeeEntity
+    class EmployeeModel
     {
+
     }
 }
