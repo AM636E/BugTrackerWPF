@@ -11,7 +11,7 @@ using UI.Models;
 
 namespace UI.ViewModel
 {
-    class BugViewModel
+    class BugViewModel : ViewModelBase
     {
         private BugModel _model;
 

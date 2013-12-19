@@ -4,8 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             
+             xmlns:ViewModel="clr-namespace:UI.ViewModel"
+             >
     <Grid>
-            
+        <StackPanel>
+            <TextBox></TextBox>
+        </StackPanel>
+        <Grid>
+            <DataGrid ItemsSource="{Binding Source={StaticResource BugViewModel}, Path=Bugs, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="title">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

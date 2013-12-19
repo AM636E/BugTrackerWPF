@@ -63,10 +63,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="ViewModel\BugControl.xaml.cs">
       <DependentUpon>BugControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BugViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
