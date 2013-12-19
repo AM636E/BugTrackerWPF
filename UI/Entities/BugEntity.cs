@@ -55,6 +55,15 @@ namespace UI.Entities
         private Status _status;
         private int _build;
 
+        public int Id
+        {
+            get { return _id; }
+        }
+        public string Title
+        {
+            get { return _title; }
+        }
+
         public BugEntity()
             : base()
         {

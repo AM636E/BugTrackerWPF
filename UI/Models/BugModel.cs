@@ -12,6 +12,11 @@ namespace UI.Models
     {
         ObservableCollection<BugEntity> _entities;
 
+        public ObservableCollection<BugEntity> Entities
+        {
+            get { return _entities; }
+        }
+
         public BugModel()
         {
             _entities = new ObservableCollection<BugEntity>();
