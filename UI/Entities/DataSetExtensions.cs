@@ -44,6 +44,7 @@ namespace UI.Entities
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
+                int id = Convert.ToInt32(dr["bugid"]);
                 int         a =              Convert.ToInt32(dr["bugprojectid"]);
                 string      b =              dr["bugtitle"].ToString();
                 string      c =              dr["bugsummary"].ToString();
@@ -56,7 +57,7 @@ namespace UI.Entities
                 Status      j = (Status)     Convert.ToInt32(dr["bugstatusid"]);
 
                 result.Add(new BugEntity(
-                        a, b, c, d, e, f, g, h, i, j 
+                        id, a, b, c, d, e, f, g, h, i, j 
                ));
             }
 

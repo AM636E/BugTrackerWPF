@@ -9,12 +9,7 @@ namespace test
         {
             BugModel bg = new BugModel();
 
-            bg.Load();
-
-            if(true)
-            {
-
-            }
+            
 
         }
     }

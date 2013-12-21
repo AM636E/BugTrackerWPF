@@ -64,6 +64,8 @@ namespace UI.Entities
             get { return _title; }
         }
 
+        public ProjectEntity Project { get { return _project; } }
+
         public BugEntity()
             : base()
         {
@@ -80,6 +82,7 @@ namespace UI.Entities
                 DAL.Manager.SelectFromTable(
                 "bug", 
                 "bugid = " + _id,
+                "Bugid",
                 "BUGPROJECTID",
                 "BUGTITLE",
                 "BUGSUMMARY",
@@ -123,6 +126,33 @@ namespace UI.Entities
             Status status
         )
         {
+            this._project = new ProjectEntity(projectid);
+            this._reporter = new EmployeeEntity(reporterid);
+            this._fixer = new EmployeeEntity(fixerid);
+            this._severity = severity;
+            this._status = status;
+            this._priority = priority;
+            this._component = component;
+            this._build = build;
+            this._summary = summary;
+            this._title = title;
+        }
+
+        public BugEntity(
+            int id,
+           int projectid,
+           string title,
+           string summary,
+           int reporterid,
+           int fixerid,
+           BugPriority priority,
+           BugSeverity severity,
+           Component component,
+           int build,
+           Status status
+       )
+        {
+            this._id = id;
             this._project = new ProjectEntity(projectid);
             this._reporter = new EmployeeEntity(reporterid);
             this._fixer = new EmployeeEntity(fixerid);

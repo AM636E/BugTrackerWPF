@@ -8,6 +8,9 @@
              
              xmlns:ViewModel="clr-namespace:UI.ViewModel"
              >
+    <UserControl.Resources>
+        <ViewModel:BugViewModel x:Key="BugViewModel"></ViewModel:BugViewModel>
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <TextBox></TextBox>
@@ -15,6 +18,9 @@
         <Grid>
             <DataGrid ItemsSource="{Binding Source={StaticResource BugViewModel}, Path=Bugs, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False">
                 <DataGrid.Columns>
+                    
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                   
                     <DataGridTemplateColumn Header="title">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -22,6 +28,37 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Project Title">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Project.Title}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>Project</TextBlock>
+                                    <Expander>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"></TextBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button>Filter</Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Expander>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                    </DataGridTemplateColumn>
+
+
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
