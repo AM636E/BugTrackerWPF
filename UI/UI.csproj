@@ -68,8 +68,10 @@
     <Compile Include="ViewModel\BugControl.xaml.cs">
       <DependentUpon>BugControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BugTitleFilter.cs" />
     <Compile Include="ViewModel\BugViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\FilterViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
