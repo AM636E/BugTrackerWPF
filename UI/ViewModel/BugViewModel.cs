@@ -16,8 +16,7 @@ namespace UI.ViewModel
     class BugViewModel : ViewModelBase
     {
         private readonly IFilter _filter;
-        public RelayCommand FilterApply { get; set; }
-        public RelayCommand FilterRemove { get; set; }
+        
 
         public IFilteringSubViewModel FilterVM { get; set; }
 
@@ -37,13 +36,23 @@ namespace UI.ViewModel
             FilterVM = new FilteringSubViewModel();
             _filter = new BugTitleFilter(FilterVM as IFilterOption);
             FilterApply = new RelayCommand(ApplyFilter);
+            FilterRemove = new RelayCommand(RemoveFilter);
         }
         
         public void ApplyFilter()
         {
+            //System.Windows.MessageBox.Show("hello");
             FilterVM.Apply();
             Bugs.Filter = _filter.Apply;
         }
+
+        public void RemoveFilter()
+        {
+            FilterVM.Clear();
+            Bugs.Filter = null;
+        }
+        public RelayCommand FilterApply { get; set; }
+        public RelayCommand FilterRemove { get; set; }
 
         public RelayCommand LoadCommand
         {
