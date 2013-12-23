@@ -17,6 +17,12 @@ namespace UI.Models
         public ICollectionView Entities
         {
             get { return _entities; }
+            set { _entities = value; }
+        }
+
+        public ObservableCollection<BugEntity> EntitiesObs
+        {
+            set { _entities = new CollectionViewSource { Source = value }.View; }
         }
 
         public BugModel()
@@ -26,8 +32,7 @@ namespace UI.Models
 
         public void Load()
         {
-            _entities = 
-                new CollectionViewSource { Source = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugs() }.View;
+            EntitiesObs = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugs();
         }
     }
 }

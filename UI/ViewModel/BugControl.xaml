@@ -7,16 +7,14 @@
              d:DesignHeight="300" d:DesignWidth="300"
              
              xmlns:ViewModel="clr-namespace:UI.ViewModel"
+             DataContext="{Binding Source={StaticResource BugViewModel}}"
              >
-    <UserControl.Resources>
-        <ViewModel:BugViewModel x:Key="BugViewModel"></ViewModel:BugViewModel>
-    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <TextBox></TextBox>
         </StackPanel>
         <Grid>
-            <DataGrid ItemsSource="{Binding Source={StaticResource BugViewModel}, Path=Bugs, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False">
+            <DataGrid ItemsSource="{Binding Path=Bugs, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
@@ -27,12 +25,26 @@
                                 <TextBlock Text="{Binding Title}"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
+                        
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>Bug Title</TextBlock>
+                                    <Expander>
+                                        <StackPanel>
+                                            <TextBox Text="{Binding Path=FilterVM.FilterTerm}"></TextBox>
+                                            <Button Command="{Binding Path=FilterApply}">Apply</Button>                                            
+                                        </StackPanel>
+                                    </Expander>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
                     </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Header="Project Title">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel Height="24">
                                     <TextBlock Text="{Binding Project.Title}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
@@ -42,16 +54,9 @@
                                 <StackPanel>
                                     <TextBlock>Project</TextBlock>
                                     <Expander>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"></TextBox>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button>Filter</Button>
-                                            </StackPanel>
-                                        </Grid>
+                                        <StackPanel>
+                                            <ListBox></ListBox>
+                                        </StackPanel>
                                     </Expander>
                                 </StackPanel>
                             </DataTemplate>
