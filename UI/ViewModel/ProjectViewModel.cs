@@ -13,10 +13,9 @@ using UI.Models;
 
 namespace UI.ViewModel
 {
-    class BugViewModel : ViewModelBase
+    class ProjectViewModel : ViewModelBase
     {
         private readonly IFilter _filter;
-        private readonly IFilter _projectFilter;        
 
         public IFilteringSubViewModel FilterVM { get; set; }
 
@@ -24,11 +23,11 @@ namespace UI.ViewModel
 
         public ICollectionView Bugs
         {
-            get{return _model.Entities;}
+            get { return _model.Entities; }
             set { _model.Entities = value; }
         }
 
-        public BugViewModel()
+        public ProjectViewModel()
         {
             _model = new BugModel();
             _model.Load();
@@ -38,9 +37,10 @@ namespace UI.ViewModel
             FilterApply = new RelayCommand(ApplyFilter);
             FilterRemove = new RelayCommand(RemoveFilter);
         }
-        
+
         public void ApplyFilter()
         {
+            //System.Windows.MessageBox.Show("hello");
             FilterVM.Apply();
             Bugs.Filter = _filter.Apply;
         }
