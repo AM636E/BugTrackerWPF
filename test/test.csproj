@@ -57,10 +57,6 @@
       <Project>{9903d74b-979f-4d62-af17-85feb72a7e66}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EFTest\EFTest.csproj">
-      <Project>{756b3883-8fd6-4970-87c0-ed9c071b5656}</Project>
-      <Name>EFTest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{14b7bd90-dfb0-4285-8104-b746f21d7c4b}</Project>
       <Name>UI</Name>

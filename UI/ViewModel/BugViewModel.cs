@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace UI.ViewModel
     {
         private BugModel _model;
 
-        public ObservableCollection<UI.Entities.BugEntity> Bugs
+        public ICollectionView Bugs
         {
             get{return _model.Entities;}
         }
