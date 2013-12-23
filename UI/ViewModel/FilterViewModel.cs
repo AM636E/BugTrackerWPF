@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace UI.ViewModel
 {
+
     class FilterViewModel
     {
         ICollection _items;
