@@ -17,6 +17,7 @@ namespace UI.Models
         public ICollectionView Entities
         {
             get { return _entities; }
+            set { _entities = value; }
         }
 
         public ProjectModel()

@@ -16,9 +16,9 @@ namespace UI.ViewModel
     class ProjectViewModel : ViewModelBase
     {
        
-        private BugModel _model;
+        private ProjectModel _model;
 
-        public ICollectionView Bugs
+        public ICollectionView Projects
         {
             get { return _model.Entities; }
             set { _model.Entities = value; }
@@ -26,7 +26,7 @@ namespace UI.ViewModel
 
         public ProjectViewModel()
         {
-            _model = new BugModel();
+            _model = new ProjectModel();
             _model.Load();
             LoadCommand = new RelayCommand(_model.Load);
       
