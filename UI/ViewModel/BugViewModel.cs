@@ -30,12 +30,7 @@ namespace UI.ViewModel
             _model.Load();
             LoadCommand = new RelayCommand(_model.Load);          
         }
-    
-        public void SetFilter(int index)
-        {
-            
-        }
-       
+
         public RelayCommand LoadCommand
         {
             get;

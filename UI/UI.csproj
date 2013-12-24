@@ -65,7 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
-    <Compile Include="ViewModel\BugControl.xaml.cs">
+    <Compile Include="Views\BugControl.xaml.cs">
       <DependentUpon>BugControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BugViewModel.cs" />
@@ -88,7 +88,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ViewModel\BugControl.xaml">
+    <Page Include="Views\BugControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

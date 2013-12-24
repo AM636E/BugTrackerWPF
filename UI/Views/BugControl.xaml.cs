@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.ViewModel
+using UI.ViewModel;
+
+namespace UI.Views
 {
     /// <summary>
     /// Interaction logic for BugControl.xaml

@@ -5,9 +5,9 @@
         xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="350" Width="525"
         
-        xmlns:ViewMode="clr-namespace:UI.ViewModel"
+        xmlns:Views="clr-namespace:UI.Views"
         >
     <Grid>
-        <ViewMode:BugControl></ViewMode:BugControl>
+        <Views:BugControl></Views:BugControl>
     </Grid>
 </Window>
