@@ -13,7 +13,7 @@ namespace UI.Entities
 {
     public static class DataSetExtensions
     {
-        public static IEnumerable<ProjectEntity> ToProjects(this DataSet ds)
+        public static List<ProjectEntity> ToProjects(this DataSet ds)
         {
             List<ProjectEntity> result = new List<ProjectEntity>();
 
@@ -25,7 +25,7 @@ namespace UI.Entities
             return result;
         }
 
-        public static IEnumerable<EmployeeEntity> ToEmployeers(this DataSet ds)
+        public static List<EmployeeEntity> ToEmployeers(this DataSet ds)
         {
             List<EmployeeEntity> result = new List<EmployeeEntity>();
 
@@ -37,7 +37,7 @@ namespace UI.Entities
             return result;
         }
 
-        public static IEnumerable<BugEntity> ToBugs(this DataSet ds)
+        public static List<BugEntity> ToBugs(this DataSet ds)
         {
             List<BugEntity> result = new List<BugEntity>();
 

@@ -83,23 +83,7 @@ namespace UI.Entities
 
             try
             {
-                BugEntity tmp =
-                DAL.Manager.SelectFromTable(
-                "bug", 
-                "bugid = " + _id,
-                "Bugid",
-                "BUGPROJECTID",
-                "BUGTITLE",
-                "BUGSUMMARY",
-                "BUGSUBMITTED",
-                "BUGREPORTERID",
-                "BUGFIXERID",
-                "BUGPRIORITY",
-                "BUGSEVERITYID",
-                "BUGCOMPONENTID",
-                "BUGBUILD",
-                "BUGSTATUSID")
-                .ToBugsObs()[0];
+                BugEntity tmp = BugEntity.GetBugs()[0];
 
                 this._project = tmp._project;
                 this._reporter = tmp._reporter;
@@ -169,9 +153,28 @@ namespace UI.Entities
             this._summary = summary;
             this._title = title;
         }
-    }
-
-    #endregion
-
         
+        #endregion
+
+        public static List<BugEntity> GetBugs()
+        {
+                return 
+                DAL.Manager.SelectFromTable(
+                "bug",
+                "1 = 1",
+                "Bugid",
+                "BUGPROJECTID",
+                "BUGTITLE",
+                "BUGSUMMARY",
+                "BUGSUBMITTED",
+                "BUGREPORTERID",
+                "BUGFIXERID",
+                "BUGPRIORITY",
+                "BUGSEVERITYID",
+                "BUGCOMPONENTID",
+                "BUGBUILD",
+                "BUGSTATUSID")
+                .ToBugs();
+        }
+    }
 }
