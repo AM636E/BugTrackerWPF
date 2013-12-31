@@ -1,6 +1,6 @@
 ﻿using System.Windows.Data;
 
-namespace MultiFilteredDataGridMVVM.Helpers
+namespace UI.Helpers
 {
     /// <summary>
     /// This is a simple data class used to transport a reference to the CollectionViewSource

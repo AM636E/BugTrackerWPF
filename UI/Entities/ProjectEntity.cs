@@ -41,7 +41,7 @@ namespace UI.Entities
                     "projecttitle",
                     "PROJECTDESCRIPTION",
                     "projectprice")
-                .ToProjects()[0];
+                .ToProjectsObs()[0];
 
                 _title = tmp.Title;
                 _price = tmp.Price;

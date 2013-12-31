@@ -94,7 +94,7 @@ namespace UI.Entities
                 "BUGCOMPONENTID",
                 "BUGBUILD",
                 "BUGSTATUSID")
-                .ToBugs()[0];
+                .ToBugsObs()[0];
 
                 this._project = tmp._project;
                 this._reporter = tmp._reporter;

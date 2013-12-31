@@ -32,9 +32,6 @@ namespace UI.ViewModel
       
         }
 
-        public RelayCommand FilterApply { get; set; }
-        public RelayCommand FilterRemove { get; set; }
-
         public RelayCommand LoadCommand
         {
             get;

@@ -32,7 +32,7 @@ namespace UI.Models
 
         public void Load()
         {
-            EntitiesObs = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugs();
+            EntitiesObs = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugsObs();
         }
     }
 }

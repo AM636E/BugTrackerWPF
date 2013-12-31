@@ -31,7 +31,7 @@ namespace UI.Entities
             {
                EmployeeEntity tmp =
                DAL.Manager.SelectFromTable("employee", "empid = " + _empid, "empfname", "empsname", "emppositionid")
-               .ToEmployeers()[0];
+               .ToEmployeersObs()[0];
 
                _empfname = tmp._empfname;
                _empsname = tmp._empsname;

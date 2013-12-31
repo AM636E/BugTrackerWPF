@@ -24,7 +24,7 @@ namespace UI.Models
 
         public void Load()
         {
-            _entities = DAL.Manager.SelectFromTable("Employee", String.Empty, "*").ToEmployeers();
+            _entities = DAL.Manager.SelectFromTable("Employee", String.Empty, "*").ToEmployeersObs();
         }
     }
 }

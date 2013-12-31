@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -26,7 +27,16 @@ namespace UI.Models
 
         public void Load()
         {
-            _entities = new CollectionViewSource { Source = DAL.Manager.SelectFromTable("Project", String.Empty, "*").ToProjects() }.View;
+            _entities = new CollectionViewSource
+            {
+                Source = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects())
+            }
+            .View;
+        }
+
+        public static IEnumerable<ProjectEntity> GetProjects()
+        {
+            return DAL.Manager.SelectFromTable("Project", String.Empty, "*").ToProjects();
         }
     }
 }
