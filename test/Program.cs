@@ -8,9 +8,6 @@ namespace test
         static void Main(string[] args)
         {
             BugModel bg = new BugModel();
-
-            
-
         }
     }
 }
