@@ -14,7 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
-            <TextBox Text="{Binding SelectedTitle, RelativeSource={RelativeSource AncestorType=Window}}" Width="50" >
+            <TextBox Text="{Binding Path=SelectedTitle}" Width="50" >
                 
             </TextBox>
         </StackPanel>
