@@ -40,6 +40,7 @@ namespace UI.Entities
 
     public class BugEntity
     {
+        #region Members
         private int _id;
         private string _title;
         private string _summary;
@@ -55,6 +56,8 @@ namespace UI.Entities
         private Status _status;
         private int _build;
 
+        #endregion
+        #region Properties
         public int Id
         {
             get { return _id; }
@@ -63,15 +66,17 @@ namespace UI.Entities
         {
             get { return _title; }
         }
-
+       
         public ProjectEntity Project { get { return _project; } }
-
+        #endregion
+        #region Constructors
         public BugEntity()
             : base()
         {
 
         }
 
+        
         public BugEntity(int id)
         {
             _id = id;
@@ -165,4 +170,8 @@ namespace UI.Entities
             this._title = title;
         }
     }
+
+    #endregion
+
+        
 }

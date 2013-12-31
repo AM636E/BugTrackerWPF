@@ -22,7 +22,8 @@ namespace UI.ViewModel
         private string _selectedTitle;
         private string  _selectedProjectTitle;
 
-        private ObservableCollection<string> _projects;
+        private ObservableCollection<ProjectEntity> _projects;
+        private ObservableCollection<BugEntity> _bugs;
 
         public ICollectionView Bugs
         {
@@ -42,10 +43,7 @@ namespace UI.ViewModel
 
         private void LoadData()
         {
-            var projects = ProjectModel.GetProjects();
-            var q1 = from t in projects
-                     select t.Title;
-            _projects = new ObservableCollection<string>(q1);
+            
         }
 
         private void Handle_ViewCollectionViewSourceMessageToken(Hel)
