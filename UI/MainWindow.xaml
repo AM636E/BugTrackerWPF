@@ -8,6 +8,6 @@
         xmlns:Views="clr-namespace:UI.Views"
         >
     <Grid>
-        <Views:BugControl></Views:BugControl>
+        <Views:BugControl Loaded="BugControl_Loaded"></Views:BugControl>
     </Grid>
 </Window>

@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight;
 
 using UI.Entities;
@@ -24,7 +26,7 @@ namespace UI.ViewModel
 
         private BugModel _model;
         private string _selectedTitle;
-        private string  _selectedProjectTitle;
+        private ProjectEntity  _selectedProject;
         private bool _canRemoveTitleFilter;
         private bool _canRemoveProjectFilter;
         private ObservableCollection<ProjectEntity> _projects;
@@ -36,16 +38,34 @@ namespace UI.ViewModel
             ProjectTitle
         }
 
+        #region Commands
+        public RelayCommand<String> RemoveFilter
+        {
+            get;
+            set;
+        }
+        public RelayCommand LoadCommand
+        {
+            get;
+            set;
+        }
+        #endregion
+
         #region Properties
         public ObservableCollection<ProjectEntity> Projects
         {
             get { return _projects; }
         }
 
+        public ObservableCollection<BugEntity> BugsObs
+        {
+            get { return _bugs; }
+        }
+
         public ICollectionView Bugs
         {
             get{return _model.Entities;}
-            set { _model.Entities = value; }
+            set { _model.Entities = value; RaisePropertyChanged("Bugs"); }
         } 
         private CollectionViewSource CVS { get; set; }
 
@@ -72,13 +92,27 @@ namespace UI.ViewModel
             get { return _selectedTitle; }
             set
             {
-                MessageBox.Show(value.ToString());
-                if(_selectedTitle == value)
+                if (_selectedTitle == value)
                 {
                     return;
                 }
                 _selectedTitle = value;
-                RaisePropertyChanged("SelectedCountry");
+                RaisePropertyChanged("SelectedTitle");
+                AddTitleFilter();
+            }
+        }
+        public ProjectEntity SelectedProject
+        {
+            get { return _selectedProject; }
+            set
+            {
+                if (_selectedProject == value)
+                {
+                    return;
+                }
+                _selectedProject = value;
+                RaisePropertyChanged("SelectedProjectTitle");
+                AddProjectTitleFilter();
             }
         }
         #endregion       
@@ -89,20 +123,30 @@ namespace UI.ViewModel
             _model.Load();
             LoadCommand = new RelayCommand(_model.Load);
             LoadData();
+            Messenger.Default.Register<ViewCollectionViewSourceMessageToken>(this, Handle_ViewCollectionViewSourceMessageToken);
+            InitCommands();
         }
 
         private void LoadData()
         {
             List<BugEntity> data = BugEntity.GetBugs();
-            var a = from bug in data
-                    select bug.Project;
-            _projects = new ObservableCollection<ProjectEntity>(a.Distinct());
+            List<ProjectEntity> a = new List<ProjectEntity>();
+
+            for (var i = 0; i < data.Count; i ++ )
+            {
+                if(a.Contains(data[i].Project) == false )
+                {
+                    a.Add(data[i].Project);
+                }
+            }
+
+            _projects = new ObservableCollection<ProjectEntity>(a);
             _bugs = new ObservableCollection<BugEntity>(data);
         }
 
         private void InitCommands()
         {
-
+            RemoveFilter = new RelayCommand<string>((e) => { MessageBox.Show(e.GetType().Name.ToString()); });
         }
 
         private void Handle_ViewCollectionViewSourceMessageToken(ViewCollectionViewSourceMessageToken token)
@@ -123,15 +167,36 @@ namespace UI.ViewModel
                 CanRemoveTitleFilter = true;
             }
         }
+
+        public void AddProjectTitleFilter()
+        {
+            if(CanRemoveProjectFilter)
+            {
+                CVS.Filter -= new FilterEventHandler(FilterByProjectTitle);
+                CVS.Filter += new FilterEventHandler(FilterByProjectTitle);
+            }
+            else
+            {
+                CVS.Filter += new FilterEventHandler(FilterByProjectTitle);
+                CanRemoveProjectFilter = true;
+            }
+        }
+
+        private void FilterByProjectTitle(object sender, FilterEventArgs e)
+        {
+            BugEntity bug = e.Item as BugEntity;
+            
+            if(bug == null || bug.Project.Title != SelectedProject.Title)
+            {
+                e.Accepted = false;
+            }
+        }
+
         private void FilterByTitle(object sender, FilterEventArgs e)
         {
             var src = e.Item as BugEntity;
 
-            if(src == null)
-            {
-                e.Accepted = false;
-            }
-            else if(src.Title.IndexOf(SelectedTitle) == -1 )
+            if(src == null || src.Title.IndexOf(SelectedTitle) == -1)
             {
                 e.Accepted = false;
             }
@@ -149,10 +214,6 @@ namespace UI.ViewModel
             }
         }
 
-        public RelayCommand LoadCommand
-        {
-            get;
-            set;
-        }
+
     }
 }

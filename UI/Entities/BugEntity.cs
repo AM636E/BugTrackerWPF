@@ -128,7 +128,7 @@ namespace UI.Entities
         }
 
         public BugEntity(
-            int id,
+           int id,
            int projectid,
            string title,
            string summary,

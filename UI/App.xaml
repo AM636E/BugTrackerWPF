@@ -6,8 +6,10 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ViewModel="clr-namespace:UI.ViewModel"
+             xmlns:Collections="clr-namespace:System.Collections.ObjectModel;assembly=System"
     >         
   <Application.Resources>
         <ViewModel:BugViewModel x:Key="BugViewModel"/>
+        <ViewModel:ProjectViewModel x:Key="ProjectViewModel" />
     </Application.Resources>
 </Application>

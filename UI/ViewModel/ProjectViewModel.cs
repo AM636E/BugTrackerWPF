@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight;
 
 using UI.Models;
+using UI.Entities;
 
 namespace UI.ViewModel
 {
@@ -18,7 +19,7 @@ namespace UI.ViewModel
        
         private ProjectModel _model;
 
-        public ICollectionView Projects
+        public ObservableCollection<ProjectEntity> Projects
         {
             get { return _model.Entities; }
             set { _model.Entities = value; }
@@ -28,8 +29,7 @@ namespace UI.ViewModel
         {
             _model = new ProjectModel();
             _model.Load();
-            LoadCommand = new RelayCommand(_model.Load);
-      
+            LoadCommand = new RelayCommand(_model.Load);      
         }
 
         public RelayCommand LoadCommand

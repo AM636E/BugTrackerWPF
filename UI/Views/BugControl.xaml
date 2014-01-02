@@ -5,59 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             
+             xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
              xmlns:ViewModel="clr-namespace:UI.ViewModel"
              DataContext="{Binding Source={StaticResource BugViewModel}}"
              >
+
+    <UserControl.Resources>
+        <CollectionViewSource Source="{Binding BugsObs}" x:Key="Bugs" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical">
-            <TextBox Text="{Binding Path=SelectedTitle}" Width="50" >
-                
-            </TextBox>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>      
+        
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Title</TextBlock>
+                    <TextBox Grid.Row="1" Text="{Binding SelectedTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Row="2">Remove</Button>
+                </Grid>
+            </Grid>    
         </StackPanel>
-        <Grid Grid.Row="1">
-            <DataGrid ItemsSource="{Binding Path=Bugs, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False" Height="250">
-                <DataGrid.Columns>
-                    
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                   
-                    <DataGridTemplateColumn Header="title">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+        
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Source={StaticResource Bugs}, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False" Height="250">
+            <DataGrid.Columns>
 
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn Header="Project Title">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Height="24">
-                                    <TextBlock Text="{Binding Project.Title}"></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock>Project</TextBlock>
-                                    <Expander>
-                                        <StackPanel>
-                                            <ListBox></ListBox>
-                                        </StackPanel>
-                                    </Expander>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                    </DataGridTemplateColumn>
-
-
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Project" Binding="{Binding Project.Title}" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -6,16 +6,16 @@ using System.Windows.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using UI.Entities;
 
 namespace UI.Models
 {
     class ProjectModel
     {
-        ICollectionView _entities;
+        ObservableCollection<ProjectEntity> _entities;
 
-        public ICollectionView Entities
+        public ObservableCollection<ProjectEntity> Entities
         {
             get { return _entities; }
             set { _entities = value; }
@@ -27,11 +27,10 @@ namespace UI.Models
 
         public void Load()
         {
-            _entities = new CollectionViewSource
-            {
-                Source = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects())
-            }
-            .View;
+            _entities = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects());
+            ProjectEntity.log.Trace("load");
+            App.Current.Resources.Add("Projects", null);
+            App.Current.Resources["Projects"] = _entities;
         }
 
         public static IEnumerable<ProjectEntity> GetProjects()

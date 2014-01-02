@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
-
+using NLog;
+using DumpObject;
+using ObjectDumper;
+using System.IO;
 namespace UI.Entities
 {
     public class ProjectEntity
     {
+        
+        public static TextDumper dumper = new TextDumper();
+        public static Logger log = LogManager.GetCurrentClassLogger();
         private int _id;
         private string _title;
         private string _description;
@@ -18,44 +25,44 @@ namespace UI.Entities
         public ProjectEntity()
             :base()
         {
-            
         }
-
         public ProjectEntity(string title, string desc, decimal price)
         {
             _title = title;
             _description = desc;
             _price = price;
         }
-
         public ProjectEntity(int projectid)
         {
             _id = projectid;
 
             try
             {
-                ProjectEntity tmp = 
-                DAL.Manager.SelectFromTable(
-                    "project",
-                    "projectid =  " + _id,
-                    "projecttitle",
-                    "PROJECTDESCRIPTION",
-                    "projectprice")
-                .ToProjectsObs()[0];
+                ProjectEntity tmp = new ProjectEntity();
+                ObservableCollection<ProjectEntity> a = (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
 
+                if(a != null && _id < a.Count) 
+                {
+                    tmp = a[_id];
+                }
                 _title = tmp.Title;
                 _price = tmp.Price;
                 _description = tmp.Description;
             }
             catch (Exception e)
             {
-                MessageBox.Show(String.Format("Unable to get project from DB: " + e.Message));
+                log.Trace(String.Format("Unable to get project from DB: " + e.Message));
             }
         }
 
         public static ProjectEntity GetProjectById(int projectid)
         {
             return new ProjectEntity(projectid);
+        }
+
+        public override string ToString()
+        {
+            return Title;
         }
     }
 }
