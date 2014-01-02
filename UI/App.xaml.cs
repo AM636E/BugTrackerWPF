@@ -22,7 +22,10 @@ namespace UI
         {
             ProjectModel project = new ProjectModel();
             project.Load();
+            BugModel bugs = new BugModel();
+            bugs.Load();
 
+            Current.Resources["Bugs"] = (object)bugs.Entities;
             Current.Resources["Projects"] = (object)project.Entities;
         }
     }

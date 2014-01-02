@@ -28,9 +28,7 @@ namespace UI.Models
         public void Load()
         {
             _entities = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects());
-            ProjectEntity.log.Trace("load");
-            App.Current.Resources.Add("Projects", null);
-            App.Current.Resources["Projects"] = _entities;
+            Application.Current.Resources["Projects"] = _entities;
         }
 
         public static IEnumerable<ProjectEntity> GetProjects()

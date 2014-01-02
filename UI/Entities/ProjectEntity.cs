@@ -39,8 +39,9 @@ namespace UI.Entities
             try
             {
                 ProjectEntity tmp = new ProjectEntity();
-                ObservableCollection<ProjectEntity> a = (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
-
+                ObservableCollection<ProjectEntity> a = 
+                (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
+                
                 if(a != null && _id < a.Count) 
                 {
                     tmp = a[_id];
