@@ -9,6 +9,11 @@ namespace UI
 {
     public class console
     {
-        public static readonly Logger log = LogManager.GetCurrentClassLogger();
+        public static readonly Logger loger = LogManager.GetCurrentClassLogger();
+
+        public static void log(object o)
+        {
+            loger.Trace(o);
+        }
     }
 }

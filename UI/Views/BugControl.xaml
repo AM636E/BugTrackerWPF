@@ -34,6 +34,16 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0">Title</TextBlock>
                     <TextBox Grid.Row="1" Text="{Binding SelectedTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Row="2" Command="{Binding RemoveFilter}" CommandParameter="project">Remove</Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Project</TextBlock>
+                    <ComboBox Grid.Row="1" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                     <Button Grid.Row="2">Remove</Button>
                 </Grid>
             </Grid>    

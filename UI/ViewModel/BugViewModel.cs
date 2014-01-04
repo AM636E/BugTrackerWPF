@@ -52,9 +52,16 @@ namespace UI.ViewModel
         #endregion
 
         #region Properties
+        public RemoveFilterDelegate ProjectTitleFilter
+        {
+            get { return AddProjectTitleFilter; }
+        }
         public ObservableCollection<ProjectEntity> Projects
         {
-            get { return _projects; }
+            get 
+            {
+                return (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
+            }
         }
 
         public ObservableCollection<BugEntity> BugsObs
@@ -62,7 +69,7 @@ namespace UI.ViewModel
             get { return _bugs; }
         }
 
-        public ICollectionView Bugs
+        public ObservableCollection<BugEntity> Bugs
         {
             get{return _model.Entities;}
             set { _model.Entities = value; RaisePropertyChanged("Bugs"); }
@@ -124,29 +131,42 @@ namespace UI.ViewModel
             LoadCommand = new RelayCommand(_model.Load);
             LoadData();
             Messenger.Default.Register<ViewCollectionViewSourceMessageToken>(this, Handle_ViewCollectionViewSourceMessageToken);
-            InitCommands();
+            _InitCommands();
+            _InitRemoveFilters();
         }
 
         private void LoadData()
         {
-            List<BugEntity> data = BugEntity.GetBugs();
-            List<ProjectEntity> a = new List<ProjectEntity>();
-
-            for (var i = 0; i < data.Count; i ++ )
-            {
-                if(a.Contains(data[i].Project) == false )
-                {
-                    a.Add(data[i].Project);
-                }
-            }
-
-            _projects = new ObservableCollection<ProjectEntity>(a);
-            _bugs = new ObservableCollection<BugEntity>(data);
+            _projects = (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
+            _bugs = (ObservableCollection<BugEntity>)App.Current.FindResource("Bugs");
         }
 
-        private void InitCommands()
+        private void _InitCommands()
         {
-            RemoveFilter = new RelayCommand<string>((e) => { MessageBox.Show(e.GetType().Name.ToString()); });
+            RemoveFilter = new RelayCommand<String>(_RemoveFilter);
+        }
+        
+        public delegate void RemoveFilterDelegate();
+        Dictionary<string, RemoveFilterDelegate> _removeFilters;        
+
+        private void _InitRemoveFilters()
+        {
+            _removeFilters["project"] = () => 
+            {
+                CVS.Filter -= FilterByProjectTitle;
+                CanRemoveProjectFilter = false;
+            };
+
+            _removeFilters["project"] = () =>
+            {
+                CVS.Filter -= FilterByProjectTitle;
+                CanRemoveProjectFilter = false;
+            };
+        }
+
+        private void _RemoveFilter(String filtername)
+        {
+            _removeFilters["filtername"]();
         }
 
         private void Handle_ViewCollectionViewSourceMessageToken(ViewCollectionViewSourceMessageToken token)
@@ -154,6 +174,7 @@ namespace UI.ViewModel
             CVS = token.CVS;        
         }
 
+        #region Filters
         public void AddTitleFilter()
         {
             if(CanRemoveTitleFilter)
@@ -201,19 +222,6 @@ namespace UI.ViewModel
                 e.Accepted = false;
             }
         }
-
-        private void ApplyFilter(FilterField filter)
-        {
-            switch(filter)
-            {
-                case FilterField.Title:
-                    {
-
-                        break;
-                    }
-            }
-        }
-
-
+        #endregion
     }
 }

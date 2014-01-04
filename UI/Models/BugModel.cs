@@ -12,27 +12,21 @@ namespace UI.Models
 {
     public class BugModel
     {
-        ICollectionView  _entities;
+        ObservableCollection<BugEntity>  _entities;
 
-        public ICollectionView Entities
+        public ObservableCollection<BugEntity> Entities
         {
             get { return _entities; }
             set { _entities = value; }
         }
-
-        public ObservableCollection<BugEntity> EntitiesObs
-        {
-            set { _entities = new CollectionViewSource { Source = value }.View; }
-        }
-
         public BugModel()
         {
-            
+            _entities = new ObservableCollection<BugEntity>();
         }
 
         public void Load()
         {
-            EntitiesObs = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugsObs();
+            Entities = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugsObs();
         }
     }
 }
