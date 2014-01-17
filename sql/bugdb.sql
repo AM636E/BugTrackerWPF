@@ -830,3 +830,9 @@ IS
   
 
 /
+
+SELECT 
+  BUGSUBMITTED
+  
+FROM BUG ;
+

@@ -18,7 +18,9 @@ namespace UI.Entities
 
     public enum BugPriority
     {
-        //priorities
+        Low,
+        High,
+        Normal
     }
 
     public enum Component
@@ -45,6 +47,8 @@ namespace UI.Entities
         private string _title;
         private string _summary;
 
+        private DateTime _created = DateTime.Now;
+
         private ProjectEntity _project;
         private EmployeeEntity _reporter;
         private EmployeeEntity _fixer;
@@ -56,7 +60,7 @@ namespace UI.Entities
         private Status _status;
         private int _build;
 
-        #endregion
+        #endregion 
         #region Properties
         public int Id
         {
@@ -65,18 +69,52 @@ namespace UI.Entities
         public string Title
         {
             get { return _title; }
+            set { _title = value; }
         }
 
         public BugSeverity Severity
         {
             get { return _severity; }
+            set { _severity = value; }
         }
         public Status Status
         {
             get { return _status; }
+            set { _status = value; }
         }
-       
-        public ProjectEntity Project { get { return _project; } }
+
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value; }
+        }
+
+        public DateTime Created
+        {
+            get { return _created; }
+            set { _created = value; }
+        }
+
+        public EmployeeEntity Repoter
+        {
+            get { return _reporter; }
+            set { _reporter = value; }
+        }
+
+        public EmployeeEntity Fixer
+        {
+            get { return _fixer; }
+            set { _fixer = value; }
+        }
+
+        public double UnixTimestamp
+        {
+            get { return (double)(_created.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
+        }
+        public BugPriority Prioriry { get { return _priority; } set { _priority = value; } }
+        public Component Component { get { return _component; } set { _component = value; } }
+        public int Build { get { return _build; } set { _build = value; } }
+        public ProjectEntity Project { get { return _project; } set { _project = value; } }
         #endregion
         #region Constructors
         public BugEntity()
@@ -85,7 +123,7 @@ namespace UI.Entities
 
         }
 
-        
+
         public BugEntity(int id)
         {
             _id = id;
@@ -162,28 +200,16 @@ namespace UI.Entities
             this._summary = summary;
             this._title = title;
         }
-        
-        #endregion
 
+        #endregion
         public static List<BugEntity> GetBugs()
         {
-                return 
-                DAL.Manager.SelectFromTable(
-                "bug",
-                "1 = 1",
-                "Bugid",
-                "BUGPROJECTID",
-                "BUGTITLE",
-                "BUGSUMMARY",
-                "BUGSUBMITTED",
-                "BUGREPORTERID",
-                "BUGFIXERID",
-                "BUGPRIORITY",
-                "BUGSEVERITYID",
-                "BUGCOMPONENTID",
-                "BUGBUILD",
-                "BUGSTATUSID")
-                .ToBugs();
+            return
+            DAL.Manager.SelectFromTable(
+            "bug",
+            "1 = 1",
+             "*")
+            .ToBugs();
         }
     }
 }

@@ -5,12 +5,99 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:Entities="clr-namespace:UI.Entities"
              DataContext="{Binding Source={StaticResource BugViewModel}}"
              >
+    <UserControl.Resources>
+        <Entities:BugEntity x:Key="NewIssue" />
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <TextBlock>Title</TextBlock>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding Source={StaticResource NewIssue}, Path=Title, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock>Project</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Projects}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Project}"
+                />
+            <TextBlock>Reporter</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Employees}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Repoter}"
+                />
+
+
+            <TextBlock>Fixer</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Employees}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Fixer}"
+                />
+            
+            <TextBlock>Component</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Components}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Component}"
+                />
+            <TextBlock>Severity</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Severities}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Severity}"
+                />
+            <TextBlock>Status</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Statuses}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Status}"
+                />
+            <TextBlock>Priority</TextBlock>
+            <ComboBox 
+                ItemsSource="{Binding 
+                                Source={StaticResource BugViewModel},
+                                Path=Priorities}"
+                SelectedItem="{Binding 
+                                Source={StaticResource NewIssue}, 
+                                Mode=OneWayToSource, 
+                                UpdateSourceTrigger=PropertyChanged,
+                                Path=Prioriry}"
+                />
+            <TextBlock>Summary</TextBlock>
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+            <Button Command="{Binding Source={StaticResource BugViewModel}, Path=AddBug}" CommandParameter="{Binding Source={StaticResource NewIssue}}">Click me</Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -17,14 +18,23 @@ namespace UI.Models
             get { return _entities; }
         }
 
+
         public EmployeeModel()
         {
             _entities = new ObservableCollection<EmployeeEntity>();
         }
 
+        /// <summary>
+        /// Load employees from database and assing to application resources
+        /// </summary>
         public void Load()
         {
-            _entities = DAL.Manager.SelectFromTable("Employee", String.Empty, "*").ToEmployeersObs();
+             App.Current.Resources["Employees"] = _entities = new ObservableCollection<EmployeeEntity>(EmployeeModel.GetEmployees());
+        }
+
+        public static IEnumerable<EmployeeEntity> GetEmployees()
+        {
+            return DAL.Manager.SelectFromTable("Employee", String.Empty, "*").ToEmployeers();
         }
     }
 }

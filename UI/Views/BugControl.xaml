@@ -78,6 +78,8 @@
                 <DataGridTextColumn Header="Project" Binding="{Binding Project.Title}" />
                 <DataGridTextColumn Header="Severity" Binding="{Binding Severity}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" />
+                <DataGridTextColumn Header="Priority" Binding="{Binding Created}" />
                 
             </DataGrid.Columns>
         </DataGrid>

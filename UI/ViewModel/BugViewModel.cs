@@ -29,7 +29,13 @@ namespace UI.ViewModel
         private bool _canRemoveSeverityFilter;
         private ObservableCollection<ProjectEntity> _projects;
         private ObservableCollection<BugEntity> _bugs;
-        private List<BugSeverity> _severities;
+
+        private IEnumerable<Enum> EnumToList(Type t)
+        {
+            return Enum.GetValues(t).Cast<Enum>();
+        }
+
+        
 
         private enum FilterField
         {
@@ -38,6 +44,12 @@ namespace UI.ViewModel
         }
 
         #region Commands
+        public RelayCommand<BugEntity> AddBug
+        {
+            get;
+            set;
+        }
+        public RelayCommand ShowAddBug { set; get; }
         public RelayCommand<String> RemoveFilter
         {
             get;
@@ -51,9 +63,32 @@ namespace UI.ViewModel
         #endregion
 
         #region Properties
-        public List<BugSeverity> Severities
+        public IEnumerable<Enum> Components
         {
-            get { return _severities; }
+            get
+            {
+                return EnumToList(new Component().GetType());
+            }
+        }
+
+        public IEnumerable<Enum> Statuses
+        {
+            get
+            {
+                return EnumToList(new Status().GetType());
+            }
+        }
+
+        public IEnumerable<Enum> Priorities
+        {
+            get
+            {
+                return EnumToList(new BugPriority().GetType());
+            }
+        }
+        public IEnumerable<Enum> Severities
+        {
+            get { return EnumToList(new BugSeverity().GetType()); }
         }
         public Action ProjectTitleFilter
         {
@@ -64,6 +99,14 @@ namespace UI.ViewModel
             get 
             {
                 return (ObservableCollection<ProjectEntity>)App.Current.FindResource("Projects");
+            }
+        }
+
+        public ObservableCollection<EmployeeEntity> Employees
+        {
+            get
+            {
+                return (ObservableCollection<EmployeeEntity>)App.Current.FindResource("Employees");
             }
         }
 
@@ -152,16 +195,6 @@ namespace UI.ViewModel
             LoadData();
             Messenger.Default.Register<ViewCollectionViewSourceMessageToken>(this, Handle_ViewCollectionViewSourceMessageToken);
             _InitCommands();
-
-            _severities = new List<BugSeverity>
-            {
-                BugSeverity.Blocked,
-                BugSeverity.Normal,
-                BugSeverity.Major,
-                BugSeverity.FeatureRequest,
-                BugSeverity.Critical
-            };
-
         }
 
         private void LoadData()
@@ -173,6 +206,17 @@ namespace UI.ViewModel
         private void _InitCommands()
         {
             RemoveFilter = new RelayCommand<String>(_RemoveFilter);
+            ShowAddBug = new RelayCommand(() => 
+            {
+                BugEntity b = new BugEntity();
+                UI.Views.EditBugView v = new Views.EditBugView();
+            });
+
+            AddBug = new RelayCommand<BugEntity>((bug) =>
+            {
+                MessageBox.Show(bug.Fixer.FirstName);
+                MessageBox.Show(bug.Repoter.FirstName);
+            });
         }
         
         Dictionary<string, Action> _removeFilters;        

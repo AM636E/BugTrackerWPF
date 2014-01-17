@@ -18,6 +18,19 @@ namespace UI.Entities
         private string _empsname;
         private EmployeePosition _position;
 
+        public string FirstName
+        {
+            get { return _empfname; }
+        }
+
+        public string SurName
+        {
+            get { return _empsname; }
+        }
+
+        public int Id
+        { get { return _empid; } }
+
         public EmployeeEntity( string empfname, string empsname, EmployeePosition position)
         {
             _empfname = empfname;
@@ -45,6 +58,11 @@ namespace UI.Entities
             {
                 console.log("Unable to get employee from DB : " + e.Message);
             }
+        }
+
+        public override string ToString()
+        {
+            return FirstName + ' ' + SurName;
         }
     }
 }

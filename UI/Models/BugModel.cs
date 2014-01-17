@@ -24,9 +24,19 @@ namespace UI.Models
             _entities = new ObservableCollection<BugEntity>();
         }
 
-        public void Load()
+        public void AddBug(BugEntity entity)
         {
-            Entities = DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugsObs();
+            _entities.Add(entity);
+        }
+
+        public void Load()
+        {            
+            App.Current.Resources["Bugs"] = Entities = new ObservableCollection<BugEntity>(BugEntity.GetBugs());
+        }
+
+        public static System.Collections.Generic.IEnumerable<BugEntity> GetBugs()
+        {
+            return DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugs();
         }
     }
 }

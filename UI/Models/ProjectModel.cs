@@ -25,10 +25,14 @@ namespace UI.Models
             :base()
         { }
 
+
+        /// <summary>
+        /// Load from database
+        /// and wrtite to application resources
+        /// </summary>
         public void Load()
         {
-            _entities = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects());
-            Application.Current.Resources["Projects"] = _entities;
+            Application.Current.Resources["Projects"] = _entities = new ObservableCollection<ProjectEntity>(ProjectModel.GetProjects());
         }
 
         public static IEnumerable<ProjectEntity> GetProjects()

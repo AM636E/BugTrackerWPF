@@ -10,7 +10,7 @@ using Oracle.DataAccess.Types;
 
 namespace BugTrackerWPF.DAL
 {
-    public class OracleDB : DBManager
+    public class OracleDB : DBManager, IDisposable
     {
         private static OracleDB _instance;
         private OracleConnection _connection;
@@ -60,5 +60,10 @@ namespace BugTrackerWPF.DAL
                return _instance;
             }
         }
+
+        public void Dispose()
+       {
+           _connection.Close();
+       }
     }
 }

@@ -8,6 +8,7 @@
         xmlns:Views="clr-namespace:UI.Views"
         >
     <Grid>
-        <Views:BugControl Loaded="BugControl_Loaded"></Views:BugControl>
+        <!--<Views:BugControl Loaded="BugControl_Loaded"></Views:BugControl>-->
+        <Views:ReportIssueView />
     </Grid>
 </Window>
