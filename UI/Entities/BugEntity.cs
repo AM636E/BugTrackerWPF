@@ -65,6 +65,7 @@ namespace UI.Entities
         public int Id
         {
             get { return _id; }
+            set { _id = value; }
         }
         public string Title
         {

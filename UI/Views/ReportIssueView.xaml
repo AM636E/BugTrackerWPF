@@ -96,7 +96,10 @@
                                 Path=Prioriry}"
                 />
             <TextBlock>Summary</TextBlock>
-            <TextBox TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+            <TextBox TextWrapping="Wrap"
+                     MaxLength="1000"
+                     AcceptsReturn="True"
+                     Text="{Binding Source={StaticResource NewIssue}, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged,Path=Summary}" />
             <Button Command="{Binding Source={StaticResource BugViewModel}, Path=AddBug}" CommandParameter="{Binding Source={StaticResource NewIssue}}">Click me</Button>
         </StackPanel>
     </Grid>

@@ -27,6 +27,7 @@ namespace UI.Models
         public void AddBug(BugEntity entity)
         {
             _entities.Add(entity);
+            DAL.Manager.InsertBug(entity);
         }
 
         public void Load()

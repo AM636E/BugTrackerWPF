@@ -21,10 +21,9 @@ namespace UI.Entities
             foreach (DataRow dr in rows)
             {
                 int id = Convert.ToInt32(dr["projectid"]);
-                console.log(id);
                 if (id < en.Length)
                 {
-                    en[id] = new ProjectEntity((string)dr["projecttitle"], dr["PROJECTDESCRIPTION"].ToString(), (decimal)dr["projectprice"]);
+                    en[id] = new ProjectEntity(id, (string)dr["projecttitle"], dr["PROJECTDESCRIPTION"].ToString(), (decimal)dr["projectprice"]);
                 }
             }
 
@@ -112,7 +111,7 @@ INSERT INTO BUG
 )
 VALUES (";
             //to_timestamp('17-DEC-13 11.53.46.053000000 AM','DD-MON-RR HH.MI.SSXFF AM')
-            Console.WriteLine(bug.Project.Id.ToString());
+            //Console.WriteLine(bug.Project.Id.ToString());
             query += bug.Project.Id.ToString() + ",\'";
             query += bug.Title + "\',";
             query += '\'' + bug.Summary + "\',";
@@ -124,7 +123,6 @@ VALUES (";
             query += ((int)bug.Component).ToString() + ',';
             query += ((int)bug.Build).ToString() + ',';
             query += ((int)bug.Status).ToString() + ")";
-
             DAL.Manager.ExecuteQuery(query);
             DAL.Manager.ExecuteQuery("COMMIT");
         }

@@ -26,8 +26,9 @@ namespace UI.Entities
             :base()
         {
         }
-        public ProjectEntity(string title, string desc, decimal price)
+        public ProjectEntity(int id, string title, string desc, decimal price)
         {
+            _id = id;
             _title = title;
             _description = desc;
             _price = price;

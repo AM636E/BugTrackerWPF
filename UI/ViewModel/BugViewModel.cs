@@ -214,8 +214,15 @@ namespace UI.ViewModel
 
             AddBug = new RelayCommand<BugEntity>((bug) =>
             {
-                MessageBox.Show(bug.Fixer.FirstName);
-                MessageBox.Show(bug.Repoter.FirstName);
+                try
+                {
+                    bug.Id = _model.Entities.Last().Id + 1;
+                    _model.AddBug(bug);                    
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             });
         }
         
