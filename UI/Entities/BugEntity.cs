@@ -66,6 +66,15 @@ namespace UI.Entities
         {
             get { return _title; }
         }
+
+        public BugSeverity Severity
+        {
+            get { return _severity; }
+        }
+        public Status Status
+        {
+            get { return _status; }
+        }
        
         public ProjectEntity Project { get { return _project; } }
         #endregion

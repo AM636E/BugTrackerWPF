@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
+using System.Linq;
 
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -29,8 +25,11 @@ namespace UI.ViewModel
         private ProjectEntity  _selectedProject;
         private bool _canRemoveTitleFilter;
         private bool _canRemoveProjectFilter;
+        private BugSeverity _selectedSeverity;
+        private bool _canRemoveSeverityFilter;
         private ObservableCollection<ProjectEntity> _projects;
         private ObservableCollection<BugEntity> _bugs;
+        private List<BugSeverity> _severities;
 
         private enum FilterField
         {
@@ -52,7 +51,11 @@ namespace UI.ViewModel
         #endregion
 
         #region Properties
-        public RemoveFilterDelegate ProjectTitleFilter
+        public List<BugSeverity> Severities
+        {
+            get { return _severities; }
+        }
+        public Action ProjectTitleFilter
         {
             get { return AddProjectTitleFilter; }
         }
@@ -122,6 +125,23 @@ namespace UI.ViewModel
                 AddProjectTitleFilter();
             }
         }
+
+        public BugSeverity SelectedSeverity
+        {
+            get { return _selectedSeverity; }
+            set 
+            {
+                if(_selectedSeverity == value)
+                {
+                    return;
+                }
+                _selectedSeverity = value;
+                AddSeverityFilter();
+                RaisePropertyChanged("SelectedSeverity");
+            }
+        }
+
+        
         #endregion       
 
         public BugViewModel()
@@ -132,7 +152,16 @@ namespace UI.ViewModel
             LoadData();
             Messenger.Default.Register<ViewCollectionViewSourceMessageToken>(this, Handle_ViewCollectionViewSourceMessageToken);
             _InitCommands();
-            _InitRemoveFilters();
+
+            _severities = new List<BugSeverity>
+            {
+                BugSeverity.Blocked,
+                BugSeverity.Normal,
+                BugSeverity.Major,
+                BugSeverity.FeatureRequest,
+                BugSeverity.Critical
+            };
+
         }
 
         private void LoadData()
@@ -146,27 +175,39 @@ namespace UI.ViewModel
             RemoveFilter = new RelayCommand<String>(_RemoveFilter);
         }
         
-        public delegate void RemoveFilterDelegate();
-        Dictionary<string, RemoveFilterDelegate> _removeFilters;        
+        Dictionary<string, Action> _removeFilters;        
 
         private void _InitRemoveFilters()
         {
+            _removeFilters = new Dictionary<string, Action>();
             _removeFilters["project"] = () => 
             {
-                CVS.Filter -= FilterByProjectTitle;
+                CVS.Filter -= new FilterEventHandler(FilterByProjectTitle);
+                SelectedProject = null;
                 CanRemoveProjectFilter = false;
             };
 
-            _removeFilters["project"] = () =>
+            _removeFilters["title"] = () =>
             {
-                CVS.Filter -= FilterByProjectTitle;
-                CanRemoveProjectFilter = false;
+                CVS.Filter -= new FilterEventHandler(FilterByTitle);
+                if (CanRemoveTitleFilter)
+                {
+                    
+                    CanRemoveTitleFilter = false;
+                }
             };
         }
 
         private void _RemoveFilter(String filtername)
         {
-            _removeFilters["filtername"]();
+            try
+            {
+                _removeFilters[filtername]();              
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void Handle_ViewCollectionViewSourceMessageToken(ViewCollectionViewSourceMessageToken token)
@@ -200,6 +241,30 @@ namespace UI.ViewModel
             {
                 CVS.Filter += new FilterEventHandler(FilterByProjectTitle);
                 CanRemoveProjectFilter = true;
+            }
+        }
+
+        private void AddSeverityFilter()
+        {
+            if (_canRemoveSeverityFilter)
+            {
+                CVS.Filter -= new FilterEventHandler(FilterBySeverity);
+                CVS.Filter += new FilterEventHandler(FilterBySeverity);
+            }
+            else
+            {
+                CVS.Filter += new FilterEventHandler(FilterBySeverity);
+                CanRemoveProjectFilter = true;
+            }
+        }
+
+        private void FilterBySeverity(object sender, FilterEventArgs e)
+        {
+            BugEntity bug = e.Item as BugEntity;
+
+            if(bug == null || bug.Severity != SelectedSeverity)
+            {
+                e.Accepted = false;
             }
         }
 

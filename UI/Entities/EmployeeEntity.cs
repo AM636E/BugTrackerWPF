@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace UI.Entities
@@ -29,17 +30,20 @@ namespace UI.Entities
             _empid = empid;
             try
             {
-               EmployeeEntity tmp =
-               DAL.Manager.SelectFromTable("employee", "empid = " + _empid, "empfname", "empsname", "emppositionid")
-               .ToEmployeersObs()[0];
+                /*EmployeeEntity tmp =
+                    ((ObservableCollection<EmployeeEntity>)
+                    App.Current.Resources["Employees"])[0];
 
-               _empfname = tmp._empfname;
-               _empsname = tmp._empsname;
-               _position = tmp._position;
+                if(tmp != null)
+                {
+	               _empfname = tmp._empfname;
+	               _empsname = tmp._empsname;
+	               _position = tmp._position;
+           		}*/
             }
             catch(Exception e)
             {
-                MessageBox.Show("Unable to get employee from DB : " + e.Message);
+                console.log("Unable to get employee from DB : " + e.Message);
             }
         }
     }

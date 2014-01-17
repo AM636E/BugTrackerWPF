@@ -24,9 +24,12 @@ namespace UI
             project.Load();
             BugModel bugs = new BugModel();
             bugs.Load();
+            EmployeeModel employees = new EmployeeModel();
+            employees.Load();
 
-            Current.Resources["Bugs"] = (object)bugs.Entities;
-            Current.Resources["Projects"] = (object)project.Entities;
+            Current.Resources["Employees"]  = (object)employees.Entities;
+            Current.Resources["Bugs"]       = (object)bugs.Entities;
+            Current.Resources["Projects"]   = (object)project.Entities;
         }
     }
 }
