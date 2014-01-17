@@ -20,6 +20,8 @@ namespace UI
         public App()
             :base()
         {
+            //select all entities and add them to resources to avoid memory leaks
+            //(same entity may be created created couple of times)
             ProjectModel project = new ProjectModel();
             project.Load();
             BugModel bugs = new BugModel();
