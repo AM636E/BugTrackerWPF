@@ -70,7 +70,7 @@
             </Grid>    
         </StackPanel>
         
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Source={StaticResource Bugs}, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False" Height="250">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Source={StaticResource Bugs}, ValidatesOnDataErrors=True}"  AutoGenerateColumns="False" Height="Auto">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>

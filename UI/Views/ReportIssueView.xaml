@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <Entities:BugEntity x:Key="NewIssue" />
     </UserControl.Resources>
-    <Grid>
+    <Grid Height="Auto">
         <StackPanel>
             <TextBlock>Title</TextBlock>
             <TextBox Text="{Binding Source={StaticResource NewIssue}, Path=Title, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>

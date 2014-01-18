@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="console.cs" />
     <Compile Include="DAL\DBManager.cs" />
     <Compile Include="DAL\OracleDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

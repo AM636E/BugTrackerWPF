@@ -10,18 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI
+namespace UI.Views
 {
     /// <summary>
-    /// Interaction logic for ReportIssue.xaml
+    /// Interaction logic for ButtonPane.xaml
     /// </summary>
-    public partial class ReportIssue : Window
+    public partial class ButtonPane : UserControl
     {
-        public ReportIssue()
+        public ButtonPane()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new BugControl());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new ReportIssueView());
         }
     }
 }

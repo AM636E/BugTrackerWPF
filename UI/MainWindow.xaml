@@ -6,13 +6,16 @@
         Title="MainWindow" Height="350" Width="525"
         
         xmlns:Views="clr-namespace:UI.Views"
+        xmlns:ViewModels="clr-namespace:UI.ViewModel"
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="30*" />
+            <RowDefinition Height="289*" />
         </Grid.RowDefinitions>
-        <Views:BugControl Loaded="BugControl_Loaded" Grid.Row="0"/>
-        <Views:ReportIssueView Grid.Row="1"/>
+        <Views:ButtonPane Grid.Row="0"></Views:ButtonPane>
+        <Grid Grid.Row="1" Name="_mainContent">
+            
+        </Grid>
     </Grid>
 </Window>

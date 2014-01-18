@@ -8,6 +8,8 @@ using System.Data.Common;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 
+using UI;
+
 namespace BugTrackerWPF.DAL
 {
     public class OracleDB : DBManager, IDisposable
@@ -43,8 +45,15 @@ namespace BugTrackerWPF.DAL
 
             DataSet ds = new DataSet();
 
-            da.Fill(ds);
-
+            try
+            {
+                da.Fill(ds);
+            }
+            catch(Exception e)
+            {
+                console.log(e.Message);
+            }
+            
             return ds;
         }
 

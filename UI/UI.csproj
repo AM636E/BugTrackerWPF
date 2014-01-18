@@ -81,11 +81,11 @@
     </ApplicationDefinition>
     <Compile Include="console.cs" />
     <Compile Include="Helpers\ViewCollectionViewSouceMessageToken.cs" />
+    <Compile Include="ISwitchable.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
-    <Compile Include="ReportIssue.xaml.cs">
-      <DependentUpon>ReportIssue.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Switcher.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReportIssueViewModel.cs" />
     <Compile Include="Views\BugControl.xaml.cs">
       <DependentUpon>BugControl.xaml</DependentUpon>
@@ -93,6 +93,9 @@
     <Compile Include="ViewModel\BugViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
+    <Compile Include="Views\ButtonPane.xaml.cs">
+      <DependentUpon>ButtonPane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditBugView.xaml.cs">
       <DependentUpon>EditBugView.xaml</DependentUpon>
     </Compile>
@@ -116,11 +119,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReportIssue.xaml">
+    <Page Include="Views\BugControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BugControl.xaml">
+    <Page Include="Views\ButtonPane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

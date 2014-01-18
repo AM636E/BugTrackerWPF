@@ -16,6 +16,7 @@ namespace UI.Models
         public ObservableCollection<EmployeeEntity> Entities
         {
             get { return _entities; }
+            set { _entities = value; }
         }
 
 
