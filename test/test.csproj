@@ -48,6 +48,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,8 +60,19 @@
     <Compile Include="Entities\Bug.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\DataAccess\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\DataAccess\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DataAccess\configuration.svcinfo" />
+    <None Include="Service References\DataAccess\configuration91.svcinfo" />
     <None Include="App.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -68,6 +81,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Service References\DataAccess\BugAccessLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAccess\service.wsdl" />
+    <None Include="Service References\DataAccess\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAccess\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAccess\test.DataAccess.BugEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugTrackerWPF\DAL.csproj">
@@ -81,6 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataAccess\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

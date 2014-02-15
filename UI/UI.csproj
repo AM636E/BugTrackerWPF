@@ -79,11 +79,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="_Entities\BugEntity.cs" />
     <Compile Include="console.cs" />
+    <Compile Include="_Entities\DBExtensions.cs" />
+    <Compile Include="_Entities\EmployeeEntity.cs" />
     <Compile Include="Helpers\ViewCollectionViewSouceMessageToken.cs" />
     <Compile Include="ISwitchable.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
+    <Compile Include="_Entities\ProjectEntity.cs" />
     <Compile Include="Switcher.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReportIssueViewModel.cs" />
@@ -111,10 +115,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL.cs" />
-    <Compile Include="Entities\BugEntity.cs" />
-    <Compile Include="Entities\DBExtensions.cs" />
-    <Compile Include="Entities\EmployeeEntity.cs" />
-    <Compile Include="Entities\ProjectEntity.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
