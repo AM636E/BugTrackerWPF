@@ -11,7 +11,7 @@ using System.Data.SqlTypes;
 
 namespace BugAccessLibrary
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    using Entities;
     public class BugAccessService : IBugAccessService
     {
         static int elementsSend = 0;
@@ -34,8 +34,10 @@ namespace BugAccessLibrary
             da.Fill(ds);
 
             var a = ds.ToBugs();
-            //a.RemoveRange(, 300);
-                return a.ToArray();
+            return new BugEntity[]
+            {
+                new BugEntity(1, "3", 5.ToString())
+            };
         }
     }
 
@@ -58,7 +60,7 @@ namespace BugAccessLibrary
                     int e = Convert.ToInt32(row["bugfixerid"].ToString());
                   
                     DateTime n = (DateTime)row["bugsubmitted"];//.GetType();
-                   
+
                     result.Add(new BugEntity(
                             id, b, c
                     ));
