@@ -15,24 +15,29 @@ namespace BugAccessLibrary.Entities
         Lead,
         Boss
     }
+    [DataContract]
     public class EmployeeEntity
     {
-        
-        private int _empid;
-        private string _empfname;
-        private string _empsname;
-        private EmployeePosition _position;
+        [DataMember]
 
+        private int _empid;
+        [DataMember]
+        private string _empfname;
+        [DataMember]
+        private string _empsname;
+        [DataMember]
+        private EmployeePosition _position;
+        [DataMember]
         public string FirstName
         {
             get { return _empfname; }
         }
-
+        [DataMember]
         public string SurName
         {
             get { return _empsname; }
         }
-
+        [DataMember]
         public int Id
         { get { return _empid; } }
 

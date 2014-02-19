@@ -7,13 +7,16 @@ using System.Text;
 
 namespace BugAccessLibrary.Entities
 {
+    [DataContract]
     public class ProjectEntity
     {
+        [DataMember]
         private int projectid;
+        [DataMember]
+        public int ProjectID { get { return projectid; } set { projectid = value; } }
 
         public ProjectEntity(int projectid)
         {
-            // TODO: Complete member initialization
             this.projectid = projectid;
         }
     }

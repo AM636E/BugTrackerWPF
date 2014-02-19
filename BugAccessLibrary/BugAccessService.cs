@@ -39,6 +39,24 @@ namespace BugAccessLibrary
                 new BugEntity(1, "3", 5.ToString())
             };
         }
+
+
+        public int GetValue()
+        {
+            Console.WriteLine("Request");
+            return 2;
+        }
+
+        public Data GetTest()
+        {
+            return new Data() { Test = Test.ONE, Name = "hello" };
+        }
+
+
+        public BugEntity GetBug()
+        {
+            return new BugEntity() { Component = Component.API, Severity = BugSeverity.Critical };
+        }
     }
 
     public static class DBExtensions

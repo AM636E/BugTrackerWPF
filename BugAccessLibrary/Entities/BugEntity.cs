@@ -8,7 +8,6 @@ using System.Text;
 namespace BugAccessLibrary.Entities
 {
     [DataContract]
-    [Flags]
     public enum BugSeverity
     {
         [EnumMember]
@@ -23,7 +22,6 @@ namespace BugAccessLibrary.Entities
         FeatureRequest = 5
     }
     [DataContract]
-    [Flags]
     public enum BugPriority
     {
         [EnumMember]
@@ -34,7 +32,6 @@ namespace BugAccessLibrary.Entities
         Normal
     }
     [DataContract]
-    [Flags]
     public enum Component
     {
         [EnumMember]
@@ -46,7 +43,6 @@ namespace BugAccessLibrary.Entities
     }
 
     [DataContract]
-    [Flags]
     public enum Status
     {
         [EnumMember]
@@ -69,78 +65,92 @@ namespace BugAccessLibrary.Entities
     {
 
         #region Members
-        private int _id;
-        private string _title;
-        private string _summary;
-
+        [DataMember]
+        private int _id = 0;
+        [DataMember]
+        private string _title = String.Empty;
+        [DataMember]
+        private string _summary = String.Empty;
+        [DataMember]
         private DateTime _created = DateTime.Now;
-
-        private ProjectEntity _project;
-        private EmployeeEntity _reporter;
-        private EmployeeEntity _fixer;
-
-        private BugSeverity _severity;
-        private BugPriority _priority;
-
-        private Component _component;
-        private Status _status;
-        private int _build;
+        [DataMember]
+        private ProjectEntity _project = null;
+        [DataMember]
+        private EmployeeEntity _reporter = null;
+        [DataMember]
+        private EmployeeEntity _fixer = null;
+        [DataMember]
+        private BugSeverity _severity = BugSeverity.Normal;
+        [DataMember]
+        private BugPriority _priority = BugPriority.Normal;
+        [DataMember]
+        private Component _component = Component.API;
+        [DataMember]
+        private Status _status = Status.New;
+        [DataMember]
+        private int _build = 0;
 
         #endregion
         #region Properties
+        [DataMember]
         public int Id
         {
             get { return _id; }
             set { _id = value; }
         }
+        [DataMember]
         public string Title
         {
             get { return _title; }
             set { _title = value; }
         }
-
+        [DataMember]
         public BugSeverity Severity
         {
             get { return _severity; }
             set { _severity = value; }
         }
+        [DataMember]
         public Status Status
         {
             get { return _status; }
             set { _status = value; }
         }
-
+        [DataMember]
         public string Summary
         {
             get { return _summary; }
             set { _summary = value; }
         }
-
+        [DataMember]
         public DateTime Created
         {
             get { return _created; }
             set { _created = value; }
         }
-
+        [DataMember]
         public EmployeeEntity Repoter
         {
             get { return _reporter; }
             set { _reporter = value; }
         }
-
+        [DataMember]
         public EmployeeEntity Fixer
         {
             get { return _fixer; }
             set { _fixer = value; }
         }
-
+        [DataMember]
         public double UnixTimestamp
         {
             get { return (double)(_created.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
         }
+        [DataMember]
         public BugPriority Prioriry { get { return _priority; } set { _priority = value; } }
+        [DataMember]
         public Component Component { get { return _component; } set { _component = value; } }
         public int Build { get { return _build; } set { _build = value; } }
+        [DataMember]
         public ProjectEntity Project { get { return _project; } set { _project = value; } }
         #endregion
         public BugEntity(int id, string b, string c)
