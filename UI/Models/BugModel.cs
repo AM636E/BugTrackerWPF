@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-
+using System.Windows.Threading;
 using UI.Entities;
+using DA = UI.DataAccessService;
 
 namespace UI.Models
 {
     public class BugModel
     {
-        ObservableCollection<BugEntity>  _entities;
+        ObservableCollection<BugEntity> _entities;
 
         public ObservableCollection<BugEntity> Entities
         {
@@ -22,6 +23,10 @@ namespace UI.Models
         public BugModel()
         {
             _entities = new ObservableCollection<BugEntity>();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 3, 0);
+
+            timer.Tick += (o, e) => { Load(); };
         }
 
         public void AddBug(BugEntity entity)
@@ -37,7 +42,7 @@ namespace UI.Models
 
         public static System.Collections.Generic.IEnumerable<BugEntity> GetBugs()
         {
-            return DAL.Manager.SelectFromTable("bug", String.Empty, "*").ToBugs();
+            throw new NotImplementedException();
         }
     }
 }

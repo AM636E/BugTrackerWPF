@@ -58,39 +58,27 @@ namespace BugAccessLibrary.Entities
         Unconfirmed = 6
     }
 
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "BugAccessLibrary.ContractType".
     [DataContract]
-    public class BugEntity
+    public class Bug
     {
+        private int _id;
+        private string _title;
+        private string _summary;
 
-        #region Members
-        [DataMember]
-        private int _id = 0;
-        [DataMember]
-        private string _title = String.Empty;
-        [DataMember]
-        private string _summary = String.Empty;
-        [DataMember]
         private DateTime _created = DateTime.Now;
-        [DataMember]
-        private ProjectEntity _project = null;
-        [DataMember]
-        private EmployeeEntity _reporter = null;
-        [DataMember]
-        private EmployeeEntity _fixer = null;
-        [DataMember]
-        private BugSeverity _severity = BugSeverity.Normal;
-        [DataMember]
-        private BugPriority _priority = BugPriority.Normal;
-        [DataMember]
-        private Component _component = Component.API;
-        [DataMember]
-        private Status _status = Status.New;
-        [DataMember]
-        private int _build = 0;
 
-        #endregion
+        private Project _project;
+        private Employee _reporter;
+        private Employee _fixer;
+
+        private BugSeverity _severity;
+        private BugPriority _priority;
+
+        private Component _component;
+        private Status _status;
+        private int _build;
+
+
         #region Properties
         [DataMember]
         public int Id
@@ -122,93 +110,51 @@ namespace BugAccessLibrary.Entities
             get { return _summary; }
             set { _summary = value; }
         }
+
         [DataMember]
-        public DateTime Created
-        {
-            get { return _created; }
-            set { _created = value; }
-        }
-        [DataMember]
-        public EmployeeEntity Repoter
+        public Employee Repoter
         {
             get { return _reporter; }
             set { _reporter = value; }
         }
         [DataMember]
-        public EmployeeEntity Fixer
+        public Employee Fixer
         {
             get { return _fixer; }
             set { _fixer = value; }
         }
-        [DataMember]
-        public double UnixTimestamp
-        {
-            get { return (double)(_created.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
-        }
+        
         [DataMember]
         public BugPriority Prioriry { get { return _priority; } set { _priority = value; } }
         [DataMember]
         public Component Component { get { return _component; } set { _component = value; } }
+        [DataMember]
         public int Build { get { return _build; } set { _build = value; } }
         [DataMember]
-        public ProjectEntity Project { get { return _project; } set { _project = value; } }
+        public Project Project { get { return _project; } set { _project = value; } }
         #endregion
-        public BugEntity(int id, string b, string c)
-        {
-            this.Id = id;
-            this.Title = b;
-            this.Summary = c;
-        }
+
 
         #region Constructors
-        public BugEntity()
-            : base()
-        {
-
-        }
-        public BugEntity(
-            int projectid,
-            string title,
-            string summary,
-            int reporterid,
-            int fixerid,
-            BugPriority priority,
-            BugSeverity severity,
-            Component component,
-            int build,
-            Status status
-        )
-        {
-            this._project = new ProjectEntity(projectid);
-            this._reporter = new EmployeeEntity(reporterid);
-            this._fixer = new EmployeeEntity(fixerid);
-            this._severity = severity;
-            this._status = status;
-            this._priority = priority;
-            this._component = component;
-            this._build = build;
-            this._summary = summary;
-            this._title = title;
-        }
-
-        public BugEntity(
-           int id,
-           int projectid,
-           string title,
-           string summary,
-           int reporterid,
-           int fixerid,
-           BugPriority priority,
-           BugSeverity severity,
-           Component component,
-           int build,
-           Status status
-       )
+        public Bug() : base() { }
+        public Bug(
+          int id,
+          int projectid,
+          string title,
+          string summary,
+          int reporterid,
+          int fixerid,
+          BugPriority priority,
+          BugSeverity severity,
+          Component component,
+          int build,
+          Status status
+      )
         {
             this._id = id;
-            this._project = new ProjectEntity(projectid);
-            this._reporter = new EmployeeEntity(reporterid);
-            this._fixer = new EmployeeEntity(fixerid);
+            this._project = new Project(projectid);
+            this._reporter = new Employee(reporterid);
+            this._fixer = new Employee(fixerid);
             this._severity = severity;
             this._status = status;
             this._priority = priority;
@@ -217,6 +163,8 @@ namespace BugAccessLibrary.Entities
             this._summary = summary;
             this._title = title;
         }
+
+        
 
         #endregion
     }

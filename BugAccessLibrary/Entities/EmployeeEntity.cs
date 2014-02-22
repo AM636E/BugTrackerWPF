@@ -10,45 +10,52 @@ namespace BugAccessLibrary.Entities
     [DataContract]
     public enum EmployeePosition
     {
+        [EnumMember]
         Jun = 1,
+        [EnumMember]
         Middle,
+        [EnumMember]
         Lead,
+        [EnumMember]
         Boss
     }
     [DataContract]
-    public class EmployeeEntity
+    public class Employee
     {
-        [DataMember]
 
         private int _empid;
-        [DataMember]
         private string _empfname;
-        [DataMember]
         private string _empsname;
-        [DataMember]
         private EmployeePosition _position;
         [DataMember]
         public string FirstName
         {
+            set { _empfname = value; }
             get { return _empfname; }
         }
         [DataMember]
         public string SurName
         {
+            set {_empsname = value;}
             get { return _empsname; }
         }
         [DataMember]
         public int Id
-        { get { return _empid; } }
+        {
+            get { return _empid; }
+            set { _empid = value; }
+        }
+        [DataMember]
+        public EmployeePosition Position = EmployeePosition.Boss;
 
-        public EmployeeEntity(string empfname, string empsname, EmployeePosition position)
+         public Employee(string empfname, string empsname, EmployeePosition position)
         {
             _empfname = empfname;
             _empsname = empsname;
             _position = position;
         }
 
-        public EmployeeEntity(int reporterid)
+        public Employee(int reporterid)
         {
         }
     }

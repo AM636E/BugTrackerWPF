@@ -38,7 +38,7 @@ namespace test
                 webhost.Open();
 
                 System.Net.WebClient client = new System.Net.WebClient();
-                client.DownloadString(@"http://localhost:5555/GetTest");
+                Console.WriteLine(client.DownloadString(@"http://localhost:5555/GetBugs"));
 
                 Console.ReadLine();
             }
@@ -57,7 +57,7 @@ namespace test
                     factory = new ChannelFactory<IBugAccessService>(binding, adress);
                     IBugAccessService service = factory.CreateChannel();
 
-                    service.GetValue();
+
                 }
                 catch (Exception e)
                 {

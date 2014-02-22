@@ -12,10 +12,62 @@ using System.Data.SqlTypes;
 namespace BugAccessLibrary
 {
     using Entities;
+    [ServiceBehavior(InstanceContextMode=InstanceContextMode.PerCall)]
     public class BugAccessService : IBugAccessService
     {
-        static int elementsSend = 0;
-        public BugEntity[] GetBugs()
+        private Employee[] _employees;
+        private Bug[] _bugs;
+        private Project[] _projects;
+        public BugAccessService()
+        {
+            _employees = GetEmployees();            
+            _projects = GetProjects();
+            _bugs = GetBugs();
+        }
+
+        public Project[] GetProjects()
+        {
+            SqlConnectionStringBuilder con = new SqlConnectionStringBuilder();
+            con.DataSource = @"DRUD\ZAZSQLSERVER";
+            con.IntegratedSecurity = true;
+            con.InitialCatalog = "Zaz";
+            con.UserID = "zaz";
+
+            SqlConnection sql = new SqlConnection(con.ToString());
+            SqlCommand query = sql.CreateCommand();
+            query.CommandText = "SELECT * FROM Project";
+
+            SqlDataAdapter da = new SqlDataAdapter(query);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            return ds.ToProjects().ToArray();
+        }
+
+        public Employee[] GetEmployees()
+        {
+            SqlConnectionStringBuilder con = new SqlConnectionStringBuilder();
+            con.DataSource = @"DRUD\ZAZSQLSERVER";
+            con.IntegratedSecurity = true;
+            con.InitialCatalog = "Zaz";
+            con.UserID = "zaz";
+
+            SqlConnection sql = new SqlConnection(con.ToString());
+            SqlCommand query = sql.CreateCommand();
+            query.CommandText = "SELECT * FROM Employee";
+
+            SqlDataAdapter da = new SqlDataAdapter(query);
+
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            return ds.ToEmployees().ToArray();
+        }
+
+        public Bug[] GetBugs()
         {
             SqlConnectionStringBuilder con = new SqlConnectionStringBuilder();
             con.DataSource = @"DRUD\ZAZSQLSERVER";
@@ -33,11 +85,7 @@ namespace BugAccessLibrary
             
             da.Fill(ds);
 
-            var a = ds.ToBugs();
-            return new BugEntity[]
-            {
-                new BugEntity(1, "3", 5.ToString())
-            };
+            return ds.ToBugs().ToArray();
         }
 
 
@@ -49,22 +97,22 @@ namespace BugAccessLibrary
 
         public Data GetTest()
         {
-            return new Data() { Test = Test.ONE, Name = "hello" };
+            return new Data() { Component = Component.API, Severity = BugSeverity.Critical };
         }
 
 
-        public BugEntity GetBug()
+        public Bug GetBug()
         {
-            return new BugEntity() { Component = Component.API, Severity = BugSeverity.Critical };
+            return new Bug(){ Component = Component.API, Severity = BugSeverity.Critical };
         }
     }
 
     public static class DBExtensions
     {
-        public static List<BugEntity> ToBugs(this DataSet ds)
+        public static List<Bug> ToBugs(this DataSet ds)
         {
             var rows = ds.Tables[0].Rows;
-            List<BugEntity> result = new List<BugEntity>(rows.Count);
+            List<Bug> result = new List<Bug>(rows.Count);
 
             foreach (DataRow row in rows)
             {
@@ -76,20 +124,59 @@ namespace BugAccessLibrary
                     string c = row["bugsummary"].ToString();
                     int d = Convert.ToInt32(row["bugreporterid"].ToString());
                     int e = Convert.ToInt32(row["bugfixerid"].ToString());
-                  
+                    BugPriority f = (BugPriority)Convert.ToInt32(row["bugpriority"].ToString());
+                    BugSeverity g = (BugSeverity)Convert.ToInt32(row["bugseverityid"].ToString());
+                    Component h = (Component)Convert.ToInt32(row["bugcomponentid"]);
+                    int i = Convert.ToInt32(row["bugbuild"]);
+                    Status j = (Status)Convert.ToInt32(row["bugstatusid"]);
                     DateTime n = (DateTime)row["bugsubmitted"];//.GetType();
-
-                    result.Add(new BugEntity(
-                            id, b, c
+                    
+                    result.Add(new Bug(
+                            id, a, b, c, d, e, f, g, h, i, j
                     ));
                 }
                 catch (Exception e)
                 {
-                    result.Add(new BugEntity() { Title = e.Message });
+                    Console.WriteLine(e);
                 }
             }
 
             return result;
         }
+        public static List<Project> ToProjects(this DataSet ds)
+        {
+            var rows = ds.Tables[0].Rows;
+            Project[] en = new Project[rows.Count];
+
+            foreach (DataRow dr in rows)
+            {
+                int id = Convert.ToInt32(dr["projectid"]);
+                if (id < en.Length)
+                {
+                    en[id] = new Project(id, (string)dr["projecttitle"], dr["PROJECTDESCRIPTION"].ToString(), (decimal)dr["projectprice"]);
+                }
+            }
+
+            return new List<Project>(en);
+        }
+
+        public static List<Employee> ToEmployees(this DataSet ds)
+        {
+            List<Employee> result = new List<Employee>();
+            var rows = ds.Tables[0].Rows;
+            Employee[] en = new Employee[rows.Count];
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                int id = Convert.ToInt32(dr["empid"]);
+                if (id < en.Length)
+                {
+                    en[id] = new Employee(dr["empfname"].ToString(), dr["empsname"].ToString(), (EmployeePosition)Convert.ToInt32(dr["emppositionid"]));
+                }
+            }
+
+            return new List<Employee>(en);
+        }
+        
     }
 }

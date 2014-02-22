@@ -15,17 +15,7 @@ namespace BugAccessLibrary
     {
         [OperationContract]
         [WebGet(UriTemplate="/GetBugs", ResponseFormat=WebMessageFormat.Json)]
-        BugEntity[] GetBugs();
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetTwo", ResponseFormat = WebMessageFormat.Json)]
-        int GetValue();
-
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetTest", ResponseFormat = WebMessageFormat.Json)]
-        Data GetTest();
-        [OperationContract]
-        [WebGet(UriTemplate = "/GetBug", ResponseFormat = WebMessageFormat.Json)]
-        BugEntity GetBug();
+        Bug[] GetBugs();
     }
 
     [DataContract]
@@ -40,9 +30,27 @@ namespace BugAccessLibrary
     public class Data
     {
         [DataMember]
+        public Employee Repoter = new Employee("Vasia", "Pupkin.", EmployeePosition.Boss);
+        [DataMember]
+        public DateTime Created = DateTime.Now;
+        [DataMember]
+        public BugSeverity Severity = BugSeverity.Blocked;
+
+        [DataMember]
+        public Status Status = Status.New;
+
+        [DataMember]
+        public Component Component = Component.API;
+        [DataMember]
         public Test Test { get; set; }
         [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
+        public Project Project = new Project(344) { Id = 3 };
+
+        [DataMember]
+        public Bug Bug = new Bug();
     }
    
 }

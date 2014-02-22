@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary" />
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary.Entities" />
   <xs:element name="GetBugs">
     <xs:complexType>
       <xs:sequence />
@@ -9,7 +9,7 @@
   <xs:element name="GetBugsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BugAccessLibrary" minOccurs="0" name="GetBugsResult" nillable="true" type="q1:ArrayOfBugEntity" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BugAccessLibrary.Entities" minOccurs="0" name="GetBugsResult" nillable="true" type="q1:ArrayOfBug" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
