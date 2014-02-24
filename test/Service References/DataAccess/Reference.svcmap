@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="50565d38-1524-4f5a-b095-7ec11a56ced8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3ab6d764-f49d-4f7e-9965-6a02088191c7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/Service1/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d51bd259-315b-4c15-b0bb-3c6e32062551" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3c618b42-2691-4ee3-a61d-cbba80463155" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1688ef61-b35f-4671-a322-6859d8058898" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/Service1/mex" />
-    <MetadataFile FileName="BugAccessLibrary.xsd" MetadataType="Schema" ID="53a1f862-1015-4689-b4a5-47a221b3d0de" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/Service1/mex" />
+    <MetadataFile FileName="BugAccessService.wsdl" MetadataType="Wsdl" ID="40c26730-84ff-4f5a-8aef-07db4b6ca5c1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="29b152ad-9c26-434a-a563-fa667aff29c6" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="054b1337-98ee-4d9d-9083-b5403d9184b0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="7cc8dea9-f90f-45c7-833d-b56fd897ed54" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?xsd=xsd2" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="75c46c45-ca27-47e6-8048-3a4eb979561c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="c008b8f9-fcfb-44ef-ad21-4caf2dd9b862" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BugAccessLibrary/?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

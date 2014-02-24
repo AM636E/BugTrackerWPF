@@ -9,280 +9,29 @@
 //------------------------------------------------------------------------------
 
 namespace test.DataAccess {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BugEntity", Namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary")]
-    [System.SerializableAttribute()]
-    public partial class BugEntity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BuildField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private test.DataAccess.Component ComponentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreatedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private test.DataAccess.BugPriority PrioriryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private test.DataAccess.BugSeverity SeverityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private test.DataAccess.Status StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SummaryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double UnixTimestampField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Build {
-            get {
-                return this.BuildField;
-            }
-            set {
-                if ((this.BuildField.Equals(value) != true)) {
-                    this.BuildField = value;
-                    this.RaisePropertyChanged("Build");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public test.DataAccess.Component Component {
-            get {
-                return this.ComponentField;
-            }
-            set {
-                if ((this.ComponentField.Equals(value) != true)) {
-                    this.ComponentField = value;
-                    this.RaisePropertyChanged("Component");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Created {
-            get {
-                return this.CreatedField;
-            }
-            set {
-                if ((this.CreatedField.Equals(value) != true)) {
-                    this.CreatedField = value;
-                    this.RaisePropertyChanged("Created");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public test.DataAccess.BugPriority Prioriry {
-            get {
-                return this.PrioriryField;
-            }
-            set {
-                if ((this.PrioriryField.Equals(value) != true)) {
-                    this.PrioriryField = value;
-                    this.RaisePropertyChanged("Prioriry");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public test.DataAccess.BugSeverity Severity {
-            get {
-                return this.SeverityField;
-            }
-            set {
-                if ((this.SeverityField.Equals(value) != true)) {
-                    this.SeverityField = value;
-                    this.RaisePropertyChanged("Severity");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public test.DataAccess.Status Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Summary {
-            get {
-                return this.SummaryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SummaryField, value) != true)) {
-                    this.SummaryField = value;
-                    this.RaisePropertyChanged("Summary");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double UnixTimestamp {
-            get {
-                return this.UnixTimestampField;
-            }
-            set {
-                if ((this.UnixTimestampField.Equals(value) != true)) {
-                    this.UnixTimestampField = value;
-                    this.RaisePropertyChanged("UnixTimestamp");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Component", Namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary")]
-    public enum Component : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CONFIG = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        API = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        COMPONENT = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BugPriority", Namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary")]
-    public enum BugPriority : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Low = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        High = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Normal = 2,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BugSeverity", Namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary")]
-    public enum BugSeverity : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Blocked = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Critical = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Normal = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Major = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        FeatureRequest = 5,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.datacontract.org/2004/07/BugAccessLibrary")]
-    public enum Status : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        New = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Reopened = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Verifield = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Closed = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unconfirmed = 6,
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataAccess.IBugAccessService")]
     public interface IBugAccessService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetBugs", ReplyAction="http://tempuri.org/IBugAccessService/GetBugsResponse")]
-        test.DataAccess.BugEntity[] GetBugs();
+        BugAccessLibrary.Entities.Bug[] GetBugs();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetBugs", ReplyAction="http://tempuri.org/IBugAccessService/GetBugsResponse")]
-        System.Threading.Tasks.Task<test.DataAccess.BugEntity[]> GetBugsAsync();
+        System.Threading.Tasks.Task<BugAccessLibrary.Entities.Bug[]> GetBugsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetTest", ReplyAction="http://tempuri.org/IBugAccessService/GetTestResponse")]
+        int GetTest();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetTest", ReplyAction="http://tempuri.org/IBugAccessService/GetTestResponse")]
+        System.Threading.Tasks.Task<int> GetTestAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetData", ReplyAction="http://tempuri.org/IBugAccessService/GetDataResponse")]
+        BugAccessLibrary.Data GetData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBugAccessService/GetData", ReplyAction="http://tempuri.org/IBugAccessService/GetDataResponse")]
+        System.Threading.Tasks.Task<BugAccessLibrary.Data> GetDataAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -312,12 +61,28 @@ namespace test.DataAccess {
                 base(binding, remoteAddress) {
         }
         
-        public test.DataAccess.BugEntity[] GetBugs() {
+        public BugAccessLibrary.Entities.Bug[] GetBugs() {
             return base.Channel.GetBugs();
         }
         
-        public System.Threading.Tasks.Task<test.DataAccess.BugEntity[]> GetBugsAsync() {
+        public System.Threading.Tasks.Task<BugAccessLibrary.Entities.Bug[]> GetBugsAsync() {
             return base.Channel.GetBugsAsync();
+        }
+        
+        public int GetTest() {
+            return base.Channel.GetTest();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetTestAsync() {
+            return base.Channel.GetTestAsync();
+        }
+        
+        public BugAccessLibrary.Data GetData() {
+            return base.Channel.GetData();
+        }
+        
+        public System.Threading.Tasks.Task<BugAccessLibrary.Data> GetDataAsync() {
+            return base.Channel.GetDataAsync();
         }
     }
 }

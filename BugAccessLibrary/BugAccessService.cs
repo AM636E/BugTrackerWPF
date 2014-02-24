@@ -12,7 +12,7 @@ using System.Data.SqlTypes;
 namespace BugAccessLibrary
 {
     using Entities;
-    [ServiceBehavior(InstanceContextMode=InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class BugAccessService : IBugAccessService
     {
         private Employee[] _employees;
@@ -20,9 +20,10 @@ namespace BugAccessLibrary
         private Project[] _projects;
         public BugAccessService()
         {
-            _employees = GetEmployees();            
+            _employees = GetEmployees();
             _projects = GetProjects();
             _bugs = GetBugs();
+            Console.WriteLine("hELLO woRLD");
         }
 
         public Project[] GetProjects()
@@ -82,7 +83,7 @@ namespace BugAccessLibrary
             SqlDataAdapter da = new SqlDataAdapter(query);
 
             DataSet ds = new DataSet();
-            
+
             da.Fill(ds);
 
             return ds.ToBugs().ToArray();
@@ -95,15 +96,20 @@ namespace BugAccessLibrary
             return 2;
         }
 
-        public Data GetTest()
+        public Bug GetBug()
         {
-            return new Data() { Component = Component.API, Severity = BugSeverity.Critical };
+            return new Bug() { Component = Component.API, Severity = BugSeverity.Critical };
         }
 
 
-        public Bug GetBug()
+        public int GetTest()
         {
-            return new Bug(){ Component = Component.API, Severity = BugSeverity.Critical };
+            return 3;
+        }
+
+        public Data GetData()
+        {
+            return new Data() {  };
         }
     }
 
@@ -122,21 +128,22 @@ namespace BugAccessLibrary
                     int a = Convert.ToInt32(row["bugprojectid"]);
                     string b = row["bugtitle"].ToString();
                     string c = row["bugsummary"].ToString();
-                    int d = Convert.ToInt32(row["bugreporterid"].ToString());
-                    int e = Convert.ToInt32(row["bugfixerid"].ToString());
-                    BugPriority f = (BugPriority)Convert.ToInt32(row["bugpriority"].ToString());
-                    BugSeverity g = (BugSeverity)Convert.ToInt32(row["bugseverityid"].ToString());
-                    Component h = (Component)Convert.ToInt32(row["bugcomponentid"]);
-                    int i = Convert.ToInt32(row["bugbuild"]);
-                    Status j = (Status)Convert.ToInt32(row["bugstatusid"]);
-                    DateTime n = (DateTime)row["bugsubmitted"];//.GetType();
-                    
+                    int d = (row["bugreporterid"].ToString().Length > 0) ? Convert.ToInt32(row["bugreporterid"]) : 0;
+                    int e = (row["bugfixerid"].ToString().Length > 0) ? Convert.ToInt32(row["bugfixerid"]) : 0;
+                    BugPriority f = (row["bugpriority"].ToString().Length > 0) ? (BugPriority)Convert.ToInt32(row["bugpriority"]) : 0;
+                    BugSeverity g = (row["bugpriority"].ToString().Length > 0) ? (BugSeverity)Convert.ToInt32(row["bugseverityid"]) : 0;
+                    Component h = (row["bugcomponentid"].ToString().Length > 0) ? (Component)Convert.ToInt32(row["bugcomponentid"]) : 0;
+                    int i = (row["bugbuild"].ToString().Length > 0) ? Convert.ToInt32(row["bugbuild"]) : 0;
+                    Status j = (row["bugstatusid"].ToString().Length > 0) ? (Status)Convert.ToInt32(row["bugstatusid"]) : 0;
+                    DateTime n = DateTime.Now;
+
                     result.Add(new Bug(
                             id, a, b, c, d, e, f, g, h, i, j
                     ));
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("Exception");
                     Console.WriteLine(e);
                 }
             }
@@ -177,6 +184,6 @@ namespace BugAccessLibrary
 
             return new List<Employee>(en);
         }
-        
+
     }
 }

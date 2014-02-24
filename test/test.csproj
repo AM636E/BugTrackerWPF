@@ -32,20 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DumpObject">
-      <HintPath>..\packages\DumpObject.1.0.0\lib\net40\DumpObject.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="ObjectDumper">
-      <HintPath>..\packages\ObjectDumper.1.0.0.12\lib\net35-Client\ObjectDumper.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ODAC1120320Xcopy_x64\odp.net4\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -54,8 +40,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
@@ -72,12 +56,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\BugAccessLibrary.Data.datasource" />
+    <None Include="Properties\DataSources\BugAccessLibrary.Entities.Bug.datasource" />
     <None Include="Service References\DataAccess\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\DataAccess\configuration.svcinfo" />
     <None Include="Service References\DataAccess\configuration91.svcinfo" />
+    <None Include="Service References\DataAccess\item.disco" />
     <None Include="App.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -86,39 +73,31 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\DataAccess\BugAccessLibrary.xsd">
+    <None Include="Service References\DataAccess\BugAccessService.wsdl" />
+    <None Include="Service References\DataAccess\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAccess\service.wsdl" />
-    <None Include="Service References\DataAccess\service.xsd">
+    <None Include="Service References\DataAccess\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAccess\service1.xsd">
+    <None Include="Service References\DataAccess\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAccess\test.DataAccess.BugEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataAccess\item3.xsd">
+      <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BugAccessLibrary\BugAccessLibrary.csproj">
-      <Project>{267ca14e-7f79-4c30-b65c-7b0a5924aa48}</Project>
-      <Name>BugAccessLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BugTrackerWPF\DAL.csproj">
-      <Project>{9903d74b-979f-4d62-af17-85feb72a7e66}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UI\UI.csproj">
-      <Project>{14b7bd90-dfb0-4285-8104-b746f21d7c4b}</Project>
-      <Name>UI</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugAccessLibrary\BugAccessLibrary.csproj">
+      <Project>{267ca14e-7f79-4c30-b65c-7b0a5924aa48}</Project>
+      <Name>BugAccessLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataAccess\" />

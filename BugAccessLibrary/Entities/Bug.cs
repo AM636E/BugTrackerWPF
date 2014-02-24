@@ -71,11 +71,11 @@ namespace BugAccessLibrary.Entities
         private Employee _reporter;
         private Employee _fixer;
 
-        private BugSeverity _severity;
-        private BugPriority _priority;
+        private BugSeverity _severity = BugSeverity.Normal;
+        private BugPriority _priority = BugPriority.Normal;
 
-        private Component _component;
-        private Status _status;
+        private Component _component = Component.API;
+        private Status _status = Status.New;
         private int _build;
 
 
@@ -92,45 +92,47 @@ namespace BugAccessLibrary.Entities
             get { return _title; }
             set { _title = value; }
         }
-        [DataMember]
+        //[DataMember]
         public BugSeverity Severity
         {
-            get { return _severity; }
-            set { _severity = value; }
+            get;
+            set;
         }
-        [DataMember]
+        //[DataMember]
         public Status Status
         {
             get { return _status; }
             set { _status = value; }
         }
-        [DataMember]
+        //[DataMember]
         public string Summary
         {
             get { return _summary; }
             set { _summary = value; }
         }
 
-        [DataMember]
+        //[DataMember]
         public Employee Repoter
         {
             get { return _reporter; }
             set { _reporter = value; }
         }
-        [DataMember]
+        //[DataMember]
         public Employee Fixer
         {
             get { return _fixer; }
             set { _fixer = value; }
         }
-        
-        [DataMember]
+
+       
+        //[DataMember]
+        public int PriorityInt { get { return 3; } }
         public BugPriority Prioriry { get { return _priority; } set { _priority = value; } }
-        [DataMember]
+        //[DataMember]
         public Component Component { get { return _component; } set { _component = value; } }
-        [DataMember]
+       //[DataMember]
         public int Build { get { return _build; } set { _build = value; } }
-        [DataMember]
+        //[DataMember]
         public Project Project { get { return _project; } set { _project = value; } }
         #endregion
 
@@ -164,7 +166,7 @@ namespace BugAccessLibrary.Entities
             this._title = title;
         }
 
-        
+
 
         #endregion
     }
